@@ -1,79 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Aryan Kaushik | Data Science Portfolio</title>
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        body { font-family: 'Roboto', sans-serif; background: #f7f9fb; color: #222; margin: 0; }
-        .container { max-width: 900px; margin: auto; padding: 40px 20px; }
-        .profile { display: flex; align-items: center; margin-bottom: 40px; }
-        .profile img { border-radius: 50%; width: 120px; margin-right: 32px; }
-        .profile-details { }
-        h1 { margin-bottom: 10px; }
-        h2 { margin-top: 60px; }
-        .project-list { margin-top: 30px; }
-        .project { margin-bottom: 30px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px #eee; padding: 25px 30px; }
-        .project-title { font-size: 1.3em; font-weight: bold; }
-        .project-desc { margin-top: 8px; }
-        .project-link { display: inline-block; margin-top: 12px; color: #3977f5; text-decoration: none; font-weight: bold; }
-        .timeline { margin-top: 40px; border-left: 2px solid #bbb; padding-left: 20px; }
-        .timeline-event { margin-bottom: 28px; position: relative; }
-        .timeline-event::before { content: ""; position: absolute; left: -30px; top: 8px; width: 14px; height: 14px; background: #3977f5; border-radius: 50%; }
+        body {
+            font-family: 'Roboto', sans-serif; background: #f8fafc; color: #23272f; margin: 0;
+        }
+        .container {
+            max-width: 950px; margin: 0 auto; padding: 42px 18px;
+        }
+        .profile { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+        .profile img { border-radius: 50%; width: 110px; box-shadow: 0 2px 12px #c8d1e1; }
+        .profile-details { flex: 1; min-width: 220px; }
+        h1 { margin: 0 0 10px 0; font-size: 2.3rem; font-weight: 700; letter-spacing: -2px;}
+        .resume-btn {
+            display: inline-block; background: #3977f5; color: #fff; font-weight: bold; padding: 10px 22px;
+            border-radius: 28px; margin-top: 10px; text-decoration: none; transition: background 0.2s;
+        }
+        .resume-btn:hover { background: #2755a6; }
+        .project-list { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 35px; }
+        @media (min-width: 700px) { .project-list { grid-template-columns: 1fr 1fr; } }
+        .project {
+            background: #fff; border-radius: 12px; box-shadow: 0 2px 10px #e1e5f2;
+            padding: 25px 24px; position: relative; transition: box-shadow 0.2s;
+        }
+        .project:hover { box-shadow: 0 4px 16px #b6bdd4; }
+        .project-title { font-size: 1.2em; font-weight: bold; margin-bottom: 6px; }
+        .project-desc { color: #444; margin-bottom: 10px; }
+        .project-link { color: #3977f5; font-weight: bold; text-decoration: none; }
+        .project-image {
+            width: 100%; max-width: 360px; border-radius: 8px; box-shadow: 0 2px 10px #e8eaf6; cursor: pointer;
+            margin-bottom: 9px; transition: transform 0.15s;
+        }
+        .project-image:hover { transform: scale(1.04); }
+
+        .modal { display:none; position:fixed; z-index:9; left:0; top:0; width:100vw; height:100vh; background:rgba(40,48,66,0.83);}
+        .modal-content { margin: 50px auto; display: block; max-width: 90vw; max-height: 85vh; border-radius: 16px;}
+        .close { position: absolute; top: 30px; right: 32px; color: #fff; font-size: 2.5rem; cursor: pointer;}
+        .modal.show { display:block; animation:fadein 0.3s;}
+        @keyframes fadein { from { opacity: 0; } to { opacity: 1; }}
+
+        h2 { margin-top: 60px; font-size: 1.3em; letter-spacing: 0; }
+        .timeline { margin-top: 42px; border-left: 3px solid #c2cdf1; padding-left: 28px;}
+        .timeline-event { margin-bottom: 32px; position: relative; }
+        .timeline-event::before {
+            content: ""; position: absolute; left: -32px; top: 8px; width: 15px; height: 15px;
+            background: #3977f5; border-radius: 50%; box-shadow: 0 2px 8px #c3d3fa;
+        }
+        .timeline-event strong { color: #2755a6; }
+        .contact-section {
+            margin-top: 70px; background: #fff; border-radius: 12px; box-shadow: 0 2px 10px #e1e5f2;
+            padding: 32px 26px; text-align: center;
+        }
+        .contact-icons a {
+            margin: 0 18px; color: #3977f5; font-size: 2.1em; display: inline-block; transition: color 0.17s;
+        }
+        .contact-icons a:hover { color: #2236ad; }
+        @media (max-width: 700px) {
+            .profile { flex-direction: column; align-items: flex-start; }
+            .project-list { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="profile">
-        <img src="profile_picture.png" alt="Your Name"/>
+        <img src="profile_picture.png" alt="Aryan Kaushik"/>
         <div class="profile-details">
             <h1>Aryan Kaushik</h1>
             <p>Data Scientist with expertise in fraud analytics, ML, and data engineering. Open to new opportunities.</p>
-            <a href="Aryan_Kaushik_Resume.pdf" target="_blank" class="resume-btn">📄 Download My Resume (PDF)</a>
-            <p><a href="https://www.linkedin.com/in/aryankaushik/" target="_blank">View LinkedIn</a></p>
+            <a href="Aryan_Kaushik_Resume.pdf" class="resume-btn" download>
+                <i class="fa fa-download"></i> Download Resume (PDF)
+            </a>
+            <br>
+            <a href="https://www.linkedin.com/in/aryankaushik/" target="_blank" style="color:#3977f5; font-size:1em; text-decoration:underline; margin-top:10px; display:inline-block;">
+                <i class="fab fa-linkedin"></i> View LinkedIn
+            </a>
         </div>
     </div>
+
     <h2>🧑‍💻 Projects</h2>
     <div class="project-list">
         <div class="project">
+            <img src="p1.png" alt="Fraud Project" class="project-image" onclick="openModal('p1.png')"/>
             <span class="project-title">Credit Card Fraud Detection</span>
             <div class="project-desc">
-                End-to-end ML pipeline with feature engineering, model explainability, and business recommendations. <br>
+                End-to-end ML pipeline with feature engineering, model explainability, and business recommendations.<br>
                 <b>Tools:</b> Python, LightGBM, SHAP, Plotly, sklearn, Spark, GANs.
             </div>
             <a class="project-link" href="fraud_prediction_project.html" target="_blank">View Project</a>
         </div>
-        <!-- Add more projects here -->
+        <!-- Add more projects -->
     </div>
-    <h2>Experience Timeline</h2>
+
+    <h2>📈 Experience Timeline</h2>
     <div class="timeline">
         <div class="timeline-event">
             <strong>2022–2024: Data Scientist, Deduce Inc. (acquired by CHEQ)</strong><br>
-            Led client-facing ML analyses for enterprise fraud, building scalable Python/Spark pipelines, automated QA notebooks, and dynamic dashboards. Drove client acquisition through impactful presentations and reusable analytics tools.
+            Led or collaborated on all POV analyses, integrating proprietary data with client datasets, engineering hundreds of features, and applying ML models using Python and Spark to mitigate fraud risks and reduce friction. Built reusable Python/Spark pipelines and client-facing dashboards.
         </div>
         <div class="timeline-event">
             <strong>2021–2022: Senior Data Analyst, Top Hat Monocle</strong><br>
-            Delivered actionable insights on student engagement and retention. Built predictive models and automated reporting with AWS, Looker, and QuickSight. Optimized ETL and collaborated cross-functionally to inform marketing/product decisions.
+            Guided marketing/product strategy with student engagement data, cohort/retention analysis, predictive models, and automated reporting in AWS, Looker, QuickSight.
         </div>
         <div class="timeline-event">
             <strong>2019–2021: Senior Data Analyst, Initiative Inc.</strong><br>
-            Conducted campaign analytics and A/B tests for media optimization across digital channels. Built live dashboards in Tableau, Google Data Studio, and DOMO. Designed experiment frameworks and drove deep-dive post-campaign analysis.
+            Campaign analytics, A/B tests, and real-time dashboards for digital media clients. Designed experiment frameworks, blended SQL/Python/Azure data, and delivered deep-dive post-campaign insights.
         </div>
         <div class="timeline-event">
             <strong>2017–2018: Senior Data Analyst, Aimia (Aeroplan)</strong><br>
-            Improved loyalty KPIs using R, SQL, and Tableau. Built and deployed customer lifetime value/churn models and automated performance reports. Conducted segmentation and uplift modeling for targeted marketing strategies.
+            Loyalty data modeling in R/SQL/Tableau. Built churn and CLV models, automated reporting, and drove segmentation-based campaigns for engagement and retention.
         </div>
         <div class="timeline-event">
             <strong>2017: Data Analyst, Sears Canada</strong><br>
-            Analyzed e-commerce and customer data to drive personalized marketing. Built ML-based recommendation engines and produced live Tableau reports. Leveraged Redshift, Google Analytics, and A/B testing for insights.
+            E-commerce analytics, ML-based recommendations, and campaign reporting. Built A/B test frameworks, produced live Tableau dashboards, and analyzed Redshift/Google Analytics data.
         </div>
         <div class="timeline-event">
             <strong>2014–2016: Expense Analyst, Magna International</strong><br>
-            Analyzed operating expenses and collaborated with 60+ divisions globally. Streamlined invoice, claims, and reconciliation processes using SQL, MS Access, and Excel. Provided business trend analysis and ad hoc prototyping.
+            Streamlined reconciliation and trend analysis for 60+ divisions using SQL, MS Access, Excel, and business process automation.
         </div>
     </div>
 
+    <div class="contact-section">
+        <h2>📬 Contact Me</h2>
+        <div class="contact-icons">
+            <a href="mailto:aryan23.kaushik@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/yourprofile/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <div style="font-size:1em; color:#8a96b7; margin-top:14px;">
+            Let's connect for opportunities, freelance projects, or just to geek out about data!
+        </div>
     </div>
 </div>
+
+<!-- MODAL for expanding project images -->
+<div id="modal" class="modal" onclick="closeModal()">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img" src="">
+</div>
+<script>
+function openModal(imgSrc) {
+    document.getElementById('modal-img').src = imgSrc;
+    document.getElementById('modal').classList.add('show');
+}
+function closeModal() {
+    document.getElementById('modal').classList.remove('show');
+}
+document.querySelector('.close').onclick = closeModal;
+document.getElementById('modal').onclick = function(e) {
+    if (e.target == this) closeModal();
+};
+</script>
 </body>
 </html>

@@ -4,271 +4,712 @@
     <title>Aryan Kaushik | Data Science Portfolio</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Aryan Kaushik | Data Scientist Portfolio">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Inter:400,700|Roboto:400,700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        :root {
+            --accent: #fd9274;
+            --accent-hover: #f36b41;
+            --dark-bg: #141417;
+            --section-bg: #191924;
+            --card-bg: #181820;
+            --text: #f6f6f7;
+            --muted: #b6b8bc;
+            --timeline-dot: #fd9274;
+            --card-shadow: 0 2px 20px #1c1c1c48;
+        }
+        html { scroll-behavior: smooth;}
         body {
-            font-family: 'Inter', 'Roboto', sans-serif;
-            background: linear-gradient(120deg, #e0e7ff 0%, #f7f9fb 100%);
-            color: #23324d;
+            background: var(--dark-bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
             margin: 0;
             min-height: 100vh;
         }
-        .container {
-            max-width: 1040px;
-            margin: 0 auto;
-            padding: 50px 22px 60px 22px;
-        }
-        .profile {
+        /* Sticky Header */
+        .header {
+            position: fixed;
+            top: 0; left: 0; width: 100vw;
+            z-index: 100;
+            background: rgba(20, 20, 23, 0.77);
+            box-shadow: 0 1px 12px #1e1e1e24;
+            backdrop-filter: blur(5px);
+            transition: background 0.32s;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 36px;
-            flex-wrap: wrap;
-            margin-bottom: 42px;
+            padding: 0 48px;
+            height: 70px;
         }
-        .profile img {
-            border-radius: 20px;
-            width: 150px;
-            box-shadow: 0 6px 36px #b3c6f3a9, 0 1.5px 10px #cedaff4a;
-            border: 3.5px solid #fff;
-        }
-        .profile-details {
-            flex: 1;
-            min-width: 220px;
-            backdrop-filter: blur(2.5px);
-        }
-        h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.4rem;
-            font-weight: 900;
-            letter-spacing: -2px;
-            color: #253868;
-        }
-        .profile-details p {
-            font-size: 1.15em;
-            margin: 7px 0;
-        }
-        .resume-btn {
-            display: inline-block;
-            background: linear-gradient(90deg, #3a8bfd 35%, #b2d0ff 100%);
-            color: #fff;
-            font-weight: bold;
-            padding: 12px 28px;
-            border-radius: 35px;
-            margin-top: 14px;
-            text-decoration: none;
-            transition: box-shadow 0.19s, transform 0.13s;
-            box-shadow: 0 2px 18px #9ecae1a1;
-            border: 0;
-            font-size: 1.1em;
-            letter-spacing: 0.04em;
-        }
-        .resume-btn:hover { background: linear-gradient(90deg, #2541b2, #60a3ff 100%); transform: translateY(-2px) scale(1.03);}
-        /* PROJECT HERO SECTION */
-        .project-hero {
-            display: flex;
-            align-items: center;
-            background: rgba(255,255,255,0.72);
-            border-radius: 24px;
-            box-shadow: 0 8px 36px #bac7e41a, 0 2px 20px #dbeaff4a;
-            overflow: hidden;
-            margin-top: 45px;
-            margin-bottom: 50px;
-            transition: box-shadow 0.2s;
-        }
-        .project-hero:hover {
-            box-shadow: 0 10px 44px #c6e0ff3d, 0 4px 18px #c6d8fa7a;
-        }
-        .project-banner {
-            width: 38vw;
-            min-width: 220px;
-            max-width: 370px;
-            height: 215px;
-            object-fit: cover;
-            border-right: 1px solid #e5e9f7;
-            background: #f3f7ff;
-        }
-        .project-info {
-            padding: 34px 36px;
-            flex: 1;
-        }
-        .project-title {
-            font-size: 1.5em;
-            font-weight: 700;
-            letter-spacing: -1px;
-            color: #285eb5;
-        }
-        .project-desc {
-            font-size: 1.1em;
-            margin: 14px 0 17px 0;
-            color: #23324dbb;
-        }
-        .project-link-btn {
-            display: inline-block;
-            padding: 12px 26px;
-            background: linear-gradient(90deg, #2541b2 30%, #7ea6fa 100%);
-            color: #fff;
-            border-radius: 35px;
-            font-size: 1.04em;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.16s, box-shadow 0.18s, transform 0.13s;
-            box-shadow: 0 2px 18px #9ecae13c;
+        .header.scrolled { background: #181820ee; }
+        .header-title {
+            font-size: 1.16em;
+            font-weight: 800;
             letter-spacing: 0.03em;
+            color: var(--text);
         }
-        .project-link-btn:hover {
-            background: linear-gradient(90deg, #2b348f 0%, #4c91ef 100%);
-            box-shadow: 0 4px 20px #aac7ff66;
-            transform: translateY(-2px) scale(1.045);
+        .header-title span { color: var(--accent);}
+        nav {
+            display: flex;
+            gap: 30px;
         }
-
-        /* Timeline Section */
-        h2 { margin-top: 70px; font-size: 1.25em; letter-spacing: 0; color: #2a3862;}
-        .timeline {
-            margin-top: 40px;
-            border-left: 4px solid #bed4fc;
-            padding-left: 33px;
+        nav a {
+            color: var(--text);
+            font-size: 1.03em;
+            font-weight: 600;
+            text-decoration: none;
             position: relative;
+            transition: color 0.18s;
         }
-        .timeline-event {
-            margin-bottom: 36px;
-            position: relative;
-            animation: fadeInUp 1.2s;
-            background: rgba(255,255,255,0.75);
-            border-radius: 14px 14px 14px 30px;
-            box-shadow: 0 3px 13px #d7e3ff2a;
-            padding: 20px 28px 14px 16px;
+        nav a.active, nav a:hover {
+            color: var(--accent);
         }
-        .timeline-event::before {
+        nav a.active::after, nav a:hover::after {
             content: "";
-            position: absolute;
-            left: -36px; top: 15px;
-            width: 19px; height: 19px;
-            background: linear-gradient(120deg,#3a8bfd 30%, #b2d0ff 100%);
+            display: block;
+            margin: 4px auto 0 auto;
+            width: 50%;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: width 0.2s;
+        }
+        /* Container */
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 100px 22px 60px 22px;
+        }
+        /* Profile Photo + Overview */
+        .profile-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 32px;
+            margin-bottom: 44px;
+        }
+        .profile-img {
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            box-shadow: 0 2px 8px #a4c0eeb0;
-            border: 2.2px solid #fff;
+            object-fit: cover;
+            border: 3.2px solid var(--accent);
+            box-shadow: 0 4px 26px #fd927452, 0 2px 10px #202024a8;
+            margin-top: 8px;
+        }
+        .overview-text {
+            flex: 1;
+            margin-top: 4px;
+        }
+        .overview-title {
+            font-size: 2.3em;
+            font-weight: 900;
+            margin-bottom: 4px;
+            color: var(--text);
+            letter-spacing: -1.5px;
+        }
+        .overview-title span { color: var(--accent);}
+        .overview-bio {
+            font-size: 1.1em;
+            color: var(--muted);
+            margin-bottom: 18px;
+            line-height: 1.62;
+        }
+        .resume-link {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent) 50%, #ffbeae 100%);
+            color: #191924;
+            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 32px;
+            margin-top: 12px;
+            text-decoration: none;
+            font-size: 1em;
+            box-shadow: 0 2px 16px #fd927452;
+            transition: background 0.18s, transform 0.15s;
+        }
+        .resume-link i { margin-right: 9px;}
+        .resume-link:hover { background: linear-gradient(90deg, var(--accent-hover) 70%, #ffbeae 100%); transform: scale(1.04);}
+        .social-row {
+            margin-top: 18px;
+        }
+        .social-row a {
+            margin-right: 19px;
+            font-size: 1.5em;
+            color: var(--accent);
+            display: inline-block;
+            transition: color 0.16s, transform 0.13s;
+        }
+        .social-row a:last-child { margin-right: 0;}
+        .social-row a:hover { color: #fff; transform: scale(1.11);}
+        /* Skills Section */
+        .skills-section {
+            margin-top: 16px;
+            margin-bottom: 50px;
+        }
+        .skills-title {
+            font-size: 1.4em;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+            margin-bottom: 17px;
+        }
+        .skills-grid {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        .skill-card {
+            flex: 1 1 220px;
+            background: var(--card-bg);
+            border-radius: 17px;
+            padding: 38px 28px 27px 28px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.16s, box-shadow 0.17s;
+        }
+        .skill-card:hover {
+            transform: translateY(-7px) scale(1.036);
+            box-shadow: 0 8px 32px #fd927425;
             z-index: 2;
         }
-        .timeline-event strong { color: #285eb5; font-size: 1.05em;}
-        .timeline-event:last-child { margin-bottom: 0;}
+        .skill-icon {
+            width: 54px;
+            height: 54px;
+            margin-bottom: 13px;
+            margin-top: 6px;
+        }
+        .skill-label {
+            font-size: 1.13em;
+            font-weight: 700;
+            color: var(--text);
+        }
+        /* Skill Bars */
+        .skills-bars-row {
+            margin: 38px 0 28px 0;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .skill-bar-block {
+            flex: 1 1 180px;
+            margin-bottom: 18px;
+        }
+        .skill-bar-label {
+            color: var(--muted);
+            font-size: 1.01em;
+            margin-bottom: 4px;
+        }
+        .skill-bar-bg {
+            width: 100%;
+            background: #242430;
+            border-radius: 9px;
+            height: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 9px;
+            background: linear-gradient(90deg, var(--accent) 60%, #ffd6ca 100%);
+            width: 0;
+            transition: width 1.2s cubic-bezier(.38,1.13,.69,.98);
+        }
+        /* Timeline */
+        .timeline-section {
+            margin: 85px 0 55px 0;
+        }
+        .timeline-title {
+            font-size: 1.34em;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+            margin-bottom: 18px;
+        }
+        .timeline {
+            position: relative;
+            margin-left: 26px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 18px; top: 0; bottom: 0;
+            width: 4px;
+            background: linear-gradient(var(--accent) 0%, #fff0 80%);
+            border-radius: 4px;
+            z-index: 0;
+        }
+        .timeline-event {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 48px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(42px);
+            animation: fadeInUp 1.08s forwards;
+        }
+        .timeline-event .timeline-dot {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3.5px solid var(--timeline-dot);
+            box-shadow: 0 2px 10px #fd927465;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            color: #fd9274;
+            position: relative;
+            top: 0;
+            left: -36px;
+            z-index: 2;
+            overflow: hidden;
+        }
+        .timeline-content {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px 30px 18px 26px;
+            box-shadow: var(--card-shadow);
+            margin-left: 22px;
+            min-width: 270px;
+        }
+        .timeline-content strong {
+            color: var(--accent);
+            font-size: 1.08em;
+            font-weight: 800;
+        }
         @keyframes fadeInUp {
-            0% {opacity:0; transform:translateY(40px);}
-            100% {opacity:1; transform:translateY(0);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        /* Project Cards Section */
+        .projects-section {
+            margin: 85px 0 55px 0;
+        }
+        .projects-title {
+            font-size: 1.34em;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+            margin-bottom: 17px;
+        }
+        .projects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 36px;
+        }
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 17px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            flex: 1 1 280px;
+            max-width: 340px;
+            min-width: 270px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.16s, box-shadow 0.18s;
+            cursor: pointer;
+            position: relative;
+        }
+        .project-card:hover {
+            transform: translateY(-9px) scale(1.036);
+            box-shadow: 0 10px 38px #fd927420;
+            z-index: 2;
+        }
+        .project-card img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+        }
+        .project-card-content {
+            padding: 22px 22px 18px 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card-title {
+            font-size: 1.16em;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .project-card-desc {
+            font-size: 1em;
+            color: var(--text);
+            margin: 8px 0 13px 0;
+            flex: 1;
+        }
+        .project-card-tags {
+            margin-top: 8px;
+        }
+        .project-card-tag {
+            display: inline-block;
+            font-size: 0.99em;
+            background: #291914;
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 9px;
+            margin-right: 7px;
+            margin-bottom: 4px;
+        }
+        .project-card-action {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 9px 22px;
+            background: var(--accent);
+            color: #191924;
+            font-weight: 700;
+            border-radius: 24px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: background 0.16s, color 0.13s;
+        }
+        .project-card-action:hover {
+            background: var(--accent-hover);
+            color: #fff;
         }
         /* Contact Section */
         .contact-section {
-            margin-top: 60px;
-            background: rgba(255,255,255,0.81);
-            border-radius: 14px;
-            box-shadow: 0 2px 16px #e0eaff54;
-            padding: 38px 26px 33px 26px;
+            background: var(--section-bg);
+            border-radius: 16px;
+            box-shadow: 0 2px 16px #1e1e1e54;
+            padding: 46px 18px 34px 18px;
+            margin-top: 90px;
             text-align: center;
         }
-        .contact-section h2 { margin-top:0;}
+        .contact-section h2 {
+            font-size: 1.15em;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .contact-icons {
+            margin-top: 11px;
+        }
         .contact-icons a {
-            margin: 0 18px;
-            color: #3977f5;
+            margin: 0 16px;
+            color: var(--accent);
             font-size: 2.2em;
             display: inline-block;
             transition: color 0.17s, transform 0.11s;
         }
-        .contact-icons a:hover { color: #2236ad; transform: scale(1.13);}
+        .contact-icons a:hover { color: #fff; transform: scale(1.13);}
         .footer {
-            text-align:center;
-            color:#8390b7;
-            margin-top:60px;
-            font-size:0.98em;
-            padding-bottom:16px;
+            text-align: center;
+            color: #7c7e90;
+            margin-top: 70px;
+            font-size: 0.98em;
+            padding-bottom: 22px;
         }
-        @media (max-width: 900px) {
-            .project-hero { flex-direction: column; align-items: stretch;}
-            .project-banner { width: 100%; min-width: 0; max-width: 100vw; height: 160px; border-right: 0; border-bottom:1.5px solid #e7ecf7;}
-            .project-info { padding: 25px 20px;}
+        /* Parallax/gradient section backgrounds */
+        .section-parallax {
+            background: linear-gradient(120deg, #191924 62%, #1b1a24 100%);
+            padding: 36px 0;
+            border-radius: 20px;
+            margin-bottom: 48px;
         }
-        @media (max-width: 650px) {
-            .container { padding: 23px 2vw 36px 2vw;}
-            .profile img { width: 80px; }
-            .project-title { font-size:1.13em;}
-            .timeline-event { font-size:0.98em; padding: 12px 10px 8px 10px;}
+        /* Responsive Design */
+        @media (max-width: 950px) {
+            .container { padding: 90px 5vw 50px 5vw;}
+            .profile-section { flex-direction: column; align-items: flex-start;}
+            .skills-grid { gap: 17px;}
+            .projects-grid { gap: 23px;}
+        }
+        @media (max-width: 700px) {
+            .container { padding: 75px 2vw 28px 2vw;}
+            .profile-img { width: 82px; height: 82px;}
+            .overview-title { font-size: 1.43em;}
+            .skills-title, .projects-title, .timeline-title { font-size: 1.07em;}
+            .skill-card { padding: 25px 12px 18px 12px;}
+            .project-card-content { padding: 16px 8px 10px 12px;}
+            .timeline-content { padding: 14px 10px 12px 15px;}
+        }
+        @media (max-width: 540px) {
+            .header { padding: 0 10px;}
+            .container { padding: 72px 1vw 18px 1vw;}
+            nav { gap: 17px;}
+            .projects-grid { flex-direction: column;}
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="profile">
-        <img src="profile_picture.png" alt="Aryan Kaushik"/>
-        <div class="profile-details">
-            <h1>Aryan Kaushik</h1>
-            <p>Data Scientist with expertise in fraud analytics, ML, and data engineering.<br>Open to new opportunities.</p>
-            <a href="Aryan_Kaushik_Resume.pdf" class="resume-btn" download>
-                <i class="fa fa-download"></i> Download Resume (PDF)
-            </a>
-            <br>
-            <a href="https://www.linkedin.com/in/aryankaushik/" target="_blank" style="color:#3977f5; font-size:1.14em; text-decoration:underline; margin-top:12px; display:inline-block;">
-                <i class="fab fa-linkedin"></i> View LinkedIn
-            </a>
+    <!-- Sticky Header -->
+    <div class="header" id="main-header">
+        <div class="header-title">
+            Aryan Kaushik <span>| Data Scientist</span>
         </div>
+        <nav>
+            <a href="#about" class="nav-link active">About</a>
+            <a href="#work" class="nav-link">Work</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
     </div>
 
-    <div class="project-hero">
-        <img src="project_banner.jpg" alt="Fraud Detection Project" class="project-banner"/>
-        <div class="project-info">
-            <div class="project-title">Financial Transaction Fraud Detection</div>
-            <div class="project-desc">
-                <span style="background: #e6eeff; color:#285eb5; font-size:0.99em; border-radius:7px; padding:2px 9px; margin-right:6px; box-shadow:0 1.5px 5px #b1c8ff21;">NEW</span>
-                An end-to-end ML pipeline: advanced feature engineering, model explainability, and actionable recommendations. Uses real transaction simulation data and latest ML techniques.<br>
-                <b>Tools:</b> Python, LightGBM, SHAP, Plotly, sklearn, Spark, GANs.
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Profile + Overview -->
+        <section class="profile-section" id="about">
+            <img src="profile_picture.png" alt="Aryan Kaushik" class="profile-img"/>
+            <div class="overview-text">
+                <div class="overview-title">Hi, I'm <span>Aryan Kaushik</span></div>
+                <div class="overview-bio">
+                    Data Scientist with 8+ years experience in advanced analytics, fraud risk modeling, and machine learning.
+                    <br>
+                    Python, Spark, SQL, visualization, and AI agent dev. Passionate about building ML solutions that actually impact people and business.
+                </div>
+                <a href="Aryan_Kaushik_Resume.pdf" class="resume-link" download>
+                    <i class="fa fa-download"></i> Download Resume (PDF)
+                </a>
+                <div class="social-row">
+                    <a href="https://www.linkedin.com/in/aryankaushik/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/aryankaushik89" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" target="_blank" title="Kaggle (coming soon)"><i class="fab fa-kaggle"></i></a>
+                    <a href="mailto:aryan23.kaushik@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
             </div>
-            <a class="project-link-btn" href="fraud_prediction_project.html" target="_blank">
-                <i class="fa fa-arrow-right"></i> View Project
-            </a>
+        </section>
+
+        <!-- Skills Cards Section -->
+        <section class="skills-section section-parallax">
+            <div class="skills-title">Core Expertise</div>
+            <div class="skills-grid">
+                <!-- Skill Card 1 -->
+                <div class="skill-card">
+                    <svg class="skill-icon" fill="none" viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="29" stroke="#fd9274" stroke-width="5"/>
+                        <path d="M20 46l12-28 12 28" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <div class="skill-label">Machine Learning</div>
+                </div>
+                <!-- Skill Card 2 -->
+                <div class="skill-card">
+                    <svg class="skill-icon" fill="none" viewBox="0 0 64 64">
+                        <rect x="8" y="16" width="48" height="32" rx="7" stroke="#fd9274" stroke-width="5"/>
+                        <circle cx="32" cy="32" r="9" stroke="#fff" stroke-width="3"/>
+                    </svg>
+                    <div class="skill-label">Data Analysis</div>
+                </div>
+                <!-- Skill Card 3 -->
+                <div class="skill-card">
+                    <svg class="skill-icon" fill="none" viewBox="0 0 64 64">
+                        <rect x="13" y="13" width="38" height="38" rx="8" stroke="#fd9274" stroke-width="5"/>
+                        <path d="M19 45L32 22l13 23" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <div class="skill-label">Advanced Visualization</div>
+                </div>
+                <!-- Skill Card 4 -->
+                <div class="skill-card">
+                    <svg class="skill-icon" fill="none" viewBox="0 0 64 64">
+                        <rect x="12" y="12" width="40" height="40" rx="11" stroke="#fd9274" stroke-width="5"/>
+                        <circle cx="32" cy="32" r="9" stroke="#fff" stroke-width="3"/>
+                        <path d="M32 23v10l7 5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+                    </svg>
+                    <div class="skill-label">AI Agent Development</div>
+                </div>
+            </div>
+            <!-- Animated Skill Bars -->
+            <div class="skills-bars-row">
+                <div class="skill-bar-block">
+                    <div class="skill-bar-label">Python & Spark</div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="92%"></div></div>
+                </div>
+                <div class="skill-bar-block">
+                    <div class="skill-bar-label">ML & Data Science</div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="89%"></div></div>
+                </div>
+                <div class="skill-bar-block">
+                    <div class="skill-bar-label">Data Viz (Tableau, Plotly)</div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="86%"></div></div>
+                </div>
+                <div class="skill-bar-block">
+                    <div class="skill-bar-label">AI Agents & Automation</div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="82%"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Timeline -->
+        <section class="timeline-section" id="work">
+            <div class="timeline-title">Work Experience</div>
+            <div class="timeline">
+                <!-- Timeline Event Example: update 'src' with company logo if needed -->
+                <div class="timeline-event" style="animation-delay:0.1s;">
+                    <div class="timeline-dot">
+                        <!-- Placeholder, update with: <img src="your_logo.png" style="width:24px;"> -->
+                        <i class="fa fa-building"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <strong>2022–2024: Data Scientist, Deduce Inc. (acquired by CHEQ)</strong><br>
+                        Led client-facing ML fraud analytics, Spark pipelines, QA notebooks, and dashboards. Built reusable analytics and drove client success.
+                    </div>
+                </div>
+                <div class="timeline-event" style="animation-delay:0.23s;">
+                    <div class="timeline-dot"><i class="fa fa-building"></i></div>
+                    <div class="timeline-content">
+                        <strong>2021–2022: Senior Data Analyst, Top Hat Monocle</strong><br>
+                        Delivered predictive models, automated reporting, and actionable insights to product and marketing.
+                    </div>
+                </div>
+                <div class="timeline-event" style="animation-delay:0.33s;">
+                    <div class="timeline-dot"><i class="fa fa-building"></i></div>
+                    <div class="timeline-content">
+                        <strong>2019–2021: Senior Data Analyst, Initiative Inc.</strong><br>
+                        Campaign analytics, experiment design, dashboards, and deep-dive SQL/Python analysis for major clients.
+                    </div>
+                </div>
+                <div class="timeline-event" style="animation-delay:0.44s;">
+                    <div class="timeline-dot"><i class="fa fa-building"></i></div>
+                    <div class="timeline-content">
+                        <strong>2017–2018: Senior Data Analyst, Aimia (Aeroplan)</strong><br>
+                        Loyalty KPIs, churn/CLV models, Tableau automation, segmentation, and performance reports.
+                    </div>
+                </div>
+                <div class="timeline-event" style="animation-delay:0.54s;">
+                    <div class="timeline-dot"><i class="fa fa-building"></i></div>
+                    <div class="timeline-content">
+                        <strong>2017: Data Analyst, Sears Canada</strong><br>
+                        E-commerce analytics, ML recommender engines, campaign dashboards, and live reporting.
+                    </div>
+                </div>
+                <div class="timeline-event" style="animation-delay:0.63s;">
+                    <div class="timeline-dot"><i class="fa fa-building"></i></div>
+                    <div class="timeline-content">
+                        <strong>2014–2016: Expense Analyst, Magna International</strong><br>
+                        Automated reconciliation and business trend analysis across 60+ divisions.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects-section">
+            <div class="projects-title">Projects</div>
+            <div class="projects-grid">
+                <!-- Real Project Card -->
+                <div class="project-card" onclick="window.open('fraud_prediction_project.html', '_blank');">
+                    <img src="project_banner.jpg" alt="Fraud Detection Project"/>
+                    <div class="project-card-content">
+                        <div class="project-card-title">Financial Transaction Fraud Detection</div>
+                        <div class="project-card-desc">
+                            End-to-end ML pipeline with feature engineering, model explainability, and actionable insights. Built using simulated transactions and latest ML techniques.
+                        </div>
+                        <div class="project-card-tags">
+                            <span class="project-card-tag">#python</span>
+                            <span class="project-card-tag">#sklearn</span>
+                            <span class="project-card-tag">#lightgbm</span>
+                            <span class="project-card-tag">#shap</span>
+                            <span class="project-card-tag">#spark</span>
+                        </div>
+                        <a class="project-card-action" href="fraud_prediction_project.html" target="_blank">
+                            View Project
+                        </a>
+                    </div>
+                </div>
+                <!-- Placeholder Project Card 1 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80" alt="Project Placeholder"/>
+                    <div class="project-card-content">
+                        <div class="project-card-title">Coming Soon</div>
+                        <div class="project-card-desc">
+                            Placeholder for next data science or analytics project. Details to follow!
+                        </div>
+                        <div class="project-card-tags">
+                            <span class="project-card-tag">#data</span>
+                            <span class="project-card-tag">#ml</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Placeholder Project Card 2 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Project Placeholder"/>
+                    <div class="project-card-content">
+                        <div class="project-card-title">Coming Soon</div>
+                        <div class="project-card-desc">
+                            Placeholder for another advanced analytics/AI project. Stay tuned!
+                        </div>
+                        <div class="project-card-tags">
+                            <span class="project-card-tag">#ai</span>
+                            <span class="project-card-tag">#python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <h2>Get in Touch</h2>
+            <div class="contact-icons">
+                <a href="mailto:aryan23.kaushik@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/aryankaushik/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/aryankaushik89" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" title="Kaggle (coming soon)"><i class="fab fa-kaggle"></i></a>
+            </div>
+            <div style="font-size:1em; color:#b6b8bc; margin-top:18px;">
+                Let's connect for opportunities, collaboration, or to geek out about data!
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            &copy; 2024 Aryan Kaushik &mdash; Portfolio. Made with <span style="color:var(--accent)">❤</span> and Python.
+            <span style="margin-left:22px; font-size:1em;"><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="color:var(--accent);text-decoration:none;">Back to Top</a></span>
         </div>
     </div>
 
-    <h2>📈 Experience Timeline</h2>
-    <div class="timeline">
-        <div class="timeline-event">
-            <strong>2022–2024: Data Scientist, Deduce Inc. (acquired by CHEQ)</strong><br>
-            Led client-facing ML fraud analytics, Spark pipelines, QA notebooks, and dashboards. Built reusable analytics and drove client success.
-        </div>
-        <div class="timeline-event">
-            <strong>2021–2022: Senior Data Analyst, Top Hat Monocle</strong><br>
-            Delivered predictive models, automated reporting, and actionable insights to product and marketing.
-        </div>
-        <div class="timeline-event">
-            <strong>2019–2021: Senior Data Analyst, Initiative Inc.</strong><br>
-            Campaign analytics, experiment design, dashboards, and deep-dive SQL/Python analysis for major clients.
-        </div>
-        <div class="timeline-event">
-            <strong>2017–2018: Senior Data Analyst, Aimia (Aeroplan)</strong><br>
-            Loyalty KPIs, churn/CLV models, Tableau automation, segmentation, and performance reports.
-        </div>
-        <div class="timeline-event">
-            <strong>2017: Data Analyst, Sears Canada</strong><br>
-            E-commerce analytics, ML recommender engines, campaign dashboards, and live reporting.
-        </div>
-        <div class="timeline-event">
-            <strong>2014–2016: Expense Analyst, Magna International</strong><br>
-            Automated reconciliation and business trend analysis across 60+ divisions.
-        </div>
-    </div>
-
-    <div class="contact-section">
-        <h2>📬 Contact Me</h2>
-        <div class="contact-icons">
-            <a href="mailto:aryan23.kaushik@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-            <a href="https://www.linkedin.com/in/aryankaushik/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        </div>
-        <div style="font-size:1em; color:#8a96b7; margin-top:16px;">
-            Let's connect for opportunities, collaboration, or to geek out about data!
-        </div>
-    </div>
-    <div class="footer">
-        &copy; 2024 Aryan Kaushik &mdash; Portfolio. Made with 💙 and Python.
-    </div>
-</div>
+    <!-- JS: Header scroll, nav active, skill bars, timeline animations -->
+    <script>
+        // Header: solid on scroll
+        window.addEventListener('scroll', function() {
+            document.getElementById('main-header').classList.toggle('scrolled', window.scrollY > 36);
+        });
+        // Smooth nav highlight
+        const sections = ['about','work','contact'];
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let fromTop = window.scrollY + 110;
+            sections.forEach((sec, i) => {
+                const section = document.getElementById(sec);
+                if (section && section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+                    navLinks.forEach(l=>l.classList.remove('active'));
+                    navLinks[i].classList.add('active');
+                }
+            });
+        });
+        // Animated skill bars
+        function animateSkillBars() {
+            document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                bar.style.width = bar.getAttribute('data-width');
+            });
+        }
+        window.addEventListener('scroll', () => {
+            const barsRow = document.querySelector('.skills-bars-row');
+            if (barsRow) {
+                const rect = barsRow.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 40) animateSkillBars();
+            }
+        });
+        // Timeline events fade in
+        function revealTimeline() {
+            document.querySelectorAll('.timeline-event').forEach(ev => {
+                const rect = ev.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 60) {
+                    ev.style.opacity = 1;
+                    ev.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        window.addEventListener('scroll', revealTimeline);
+        window.addEventListener('DOMContentLoaded', () => {
+            animateSkillBars();
+            revealTimeline();
+        });
+    </script>
 </body>
 </html>

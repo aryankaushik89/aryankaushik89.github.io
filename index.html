@@ -97,6 +97,7 @@
             padding: 105px 32px 60px 32px;
             background: none;
         }
+        section { margin-bottom: 190px; }
         .section-title {
             font-size: 2.65em;
             font-weight: 900;
@@ -106,19 +107,17 @@
             margin-top: 0;
             text-align: left;
         }
-        .overview-section {
-            margin-bottom: 60px;
-        }
+        .overview-section { margin-bottom: 90px !important; }
         .overview-row {
             display: flex;
             align-items: flex-start;
             gap: 42px;
         }
         .overview-img {
-            width: 128px;
-            height: 128px;
+            width: 152px;
+            height: 152px;
             object-fit: cover;
-            border-radius: 22px;      /* rounded rectangle! */
+            border-radius: 22px;
             border: 3.2px solid var(--accent);
             box-shadow: 0 4px 24px #e1b16933, 0 2px 10px #2020248a;
             background: #232343;
@@ -126,9 +125,7 @@
             margin-bottom: 0;
             aspect-ratio: 1/1;
         }
-        .overview-right {
-            flex: 1;
-        }
+        .overview-right { flex: 1; }
         .overview-bio {
             font-size: 1.16em;
             color: var(--muted);
@@ -166,12 +163,12 @@
             transition: color 0.14s, transform 0.12s;
         }
         .social-row a:hover { color: #fff; transform: scale(1.11);}
-        .core-section { margin-bottom: 40px;}
+        .core-section { margin-bottom: 80px !important; }
         .core-cards-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 40px;
-            margin-bottom: 38px;
+            margin-bottom: 55px;
             width: 100%;
         }
         .core-card {
@@ -193,21 +190,21 @@
             z-index: 3;
         }
         .core-card svg {
-            width: 48px;
-            height: 48px;
+            width: 60px;
+            height: 60px;
             margin-bottom: 17px;
         }
         .core-label {
-            font-size: 1.13em;
+            font-size: 1.15em;
             font-weight: 700;
             color: var(--text);
             margin-bottom: 4px;
         }
-        .tools-section { margin-bottom: 60px;}
+        .tools-section { margin-bottom: 95px !important; }
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 26px 24px;
+            gap: 36px 32px;
             width: 100%;
         }
         .tool-col {
@@ -217,14 +214,14 @@
             width: 100%;
         }
         .tool-bubble {
-            width: 56px; height: 56px;
+            width: 92px; height: 92px;   /* 65% bigger */
             border-radius: 50%;
             background: linear-gradient(135deg, #232343 55%, #191726 100%);
             box-shadow: 0 2px 11px #19172622;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 7px;
+            margin-bottom: 9px;
             transition: box-shadow 0.19s, transform 0.13s;
             border: 2.5px solid #28285a;
             position: relative;
@@ -235,19 +232,19 @@
             transform: translateY(-4px) scale(1.055);
         }
         .tool-icon {
-            width: 28px;
-            height: 28px;
+            width: 42px;
+            height: 42px;
             object-fit: contain;
             filter: grayscale(0.06) brightness(1.19) drop-shadow(0 1px 3px #ffe19122);
         }
         .tool-label {
             color: var(--text);
-            font-size: 0.97em;
+            font-size: 1.12em;
             font-weight: 500;
-            margin-top: 2px;
+            margin-top: 6px;
             text-align: center;
         }
-        .projects-section { margin: 72px 0 72px 0;}
+        .projects-section { margin: 92px 0 92px 0 !important;}
         .projects-title {
             font-size: 2.65em;
             font-weight: 900;
@@ -326,7 +323,7 @@
         .project-card-tag.gold { color: var(--hashtag-gold);}
         .project-card-tag.purple { color: var(--hashtag-purple);}
         /* Timeline Section */
-        .timeline-section { margin: 60px 0 90px 0;}
+        .timeline-section { margin: 110px 0 120px 0 !important;}
         .timeline-title, .education-title {
             font-size: 2.65em;
             font-weight: 900;
@@ -355,10 +352,10 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            margin-bottom: 48px;
+            margin-bottom: 70px;
             position: relative;
             text-align: left;
-            min-height: 90px;
+            min-height: 110px;
         }
         .timeline-event.odd, .education-event.odd {
             left: 0;
@@ -369,48 +366,62 @@
             align-items: flex-start;
         }
         .timeline-dot, .education-dot {
-            width: 38px; height: 38px;
+            width: 62px; height: 62px; /* 65% bigger */
             background: #fff;
-            border: 3.5px solid var(--timeline-dot);
+            border: 4px solid var(--timeline-dot);
             border-radius: 50%;
             box-shadow: 0 2px 10px #e1b16955;
             position: absolute;
-            top: 30px;
-            right: -25px;
+            top: 26px;
+            right: -44px;
             z-index: 2;
             display: flex; align-items: center; justify-content: center;
         }
         .timeline-event.even .timeline-dot, .education-event.even .education-dot {
-            left: -25px; right: auto;
+            left: -44px; right: auto;
+        }
+        .timeline-dot img, .education-dot img {
+            width: 39px; height: 39px;
+            object-fit: contain;
         }
         .timeline-content, .education-content {
             background: var(--timeline-card-bg);
             border-radius: 16px;
-            padding: 22px 28px 18px 22px;
+            padding: 26px 38px 24px 34px;
             box-shadow: 0 3px 14px #1b1b2e2c;
             margin-left: 0;
             min-width: 230px;
-            max-width: 350px;
+            max-width: 395px;
             margin-top: 0;
             color: var(--text);
         }
         .timeline-job, .education-degree {
             font-weight: 800;
             color: var(--accent);
-            font-size: 1.07em;
-            margin-bottom: 4px;
+            font-size: 1.14em;
+            margin-bottom: 7px;
         }
         .timeline-years, .education-years {
-            font-size: 0.95em;
+            font-size: 1em;
             color: #ffe191cc;
-            margin-top: 9px;
-            margin-bottom: 4px;
+            margin-top: 8px;
+            margin-bottom: 7px;
             font-weight: 700;
         }
+        .timeline-content ul, .education-content ul {
+            margin: 7px 0 0 0;
+            padding-left: 20px;
+        }
+        .timeline-content ul li {
+            color: #f7f6e6;
+            font-size: 1.08em;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
         .education-institution {
-            font-size: 1.07em;
+            font-size: 1.13em;
             color: #fff;
-            margin-top: 2px;
+            margin-top: 6px;
             font-weight: 600;
         }
         @media (max-width: 1240px) {
@@ -429,10 +440,10 @@
         }
         @media (max-width: 880px) {
             .timeline-event, .timeline-event.even, .education-event, .education-event.even { width: 100%; left: 0; align-items: flex-end;}
-            .timeline-dot, .education-dot { right: -18px; left:auto;}
-            .timeline-event.even .timeline-dot, .education-event.even .education-dot { left:auto; right:-18px;}
+            .timeline-dot, .education-dot { right: -25px; left:auto;}
+            .timeline-event.even .timeline-dot, .education-event.even .education-dot { left:auto; right:-25px;}
             .timeline-content, .education-content { margin-left:0; margin-right:0;}
-            .timeline-line, .education-line { left: 21px; transform: none;}
+            .timeline-line, .education-line { left: 31px; transform: none;}
         }
         @media (max-width: 700px) {
             .container { padding: 78px 2vw 20px 2vw;}
@@ -463,11 +474,11 @@
         <section class="overview-section" id="overview">
             <div class="section-title">Overview</div>
             <div class="overview-row">
-                <img src="profile_picture.png" alt="Aryan Kaushik" class="overview-img"
-                     style="object-fit: cover; background:#191726; aspect-ratio: 1 / 1;">
+                <img src="profile_picture.png" alt="Aryan Kaushik" class="overview-img">
                 <div class="overview-right">
                     <div class="overview-bio">
-                        Data scientist with 8+ years of experience delivering advanced analytics, predictive models, and business intelligence for enterprise clients. Focused on making complex data actionable, with hands-on leadership of end-to-end ML projects in fraud detection, marketing analytics, and product optimization. Passionate about scalable data engineering, automation, and storytelling with data.                    </div>
+                        Data scientist with 8+ years of experience delivering advanced analytics, predictive models, and business intelligence for enterprise clients. Focused on making complex data actionable, with hands-on leadership of end-to-end ML projects in fraud detection, marketing analytics, and product optimization. Passionate about scalable data engineering, automation, and storytelling with data.
+                    </div>
                     <a href="Aryan_Kaushik_Resume.pdf" class="resume-link" download>
                         <i class="fa fa-download"></i> Resume
                     </a>
@@ -535,7 +546,6 @@
                     <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Looker"/></div>
                     <div class="tool-label">Looker</div>
                 </div>
-                <!-- Row 2 -->
                 <div class="tool-col">
                     <div class="tool-bubble"><img class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/8/88/Amazon_QuickSight_logo.svg" alt="QuickSight"/></div>
                     <div class="tool-label">QuickSight</div>
@@ -627,64 +637,92 @@
             <div class="timeline-title">Experience</div>
             <div class="timeline">
                 <div class="timeline-line"></div>
+                <!-- Deduce Inc. -->
                 <div class="timeline-event odd">
                     <div class="timeline-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Deduce_logo.png" alt="Deduce" style="width:24px;height:24px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Deduce_logo.png" alt="Deduce">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Data Scientist, Deduce Inc. (acquired by CHEQ)</div>
                         <div class="timeline-years">2022–2024</div>
-                        Led or collaborated on all POV analyses, integrating proprietary and client data, engineering features, and applying ML models using Python and Spark to mitigate fraud risks and reduce friction.
+                        <ul>
+                            <li>Led all data science analytics for fraud/risk, integrating client and proprietary data with ML features.</li>
+                            <li>Built and deployed fraud detection models and analytics pipelines using Python, Spark, and cloud services.</li>
+                            <li>Collaborated with product, engineering, and customer teams to drive adoption of insights.</li>
+                        </ul>
                     </div>
                 </div>
+                <!-- Top Hat Monocle -->
                 <div class="timeline-event even">
                     <div class="timeline-dot">
-                        <img src="https://yt3.googleusercontent.com/ytc/AIdro_nFFJRYR1kcvHz5IFQj9uKzbbWjBr8tGuShxsuvD3GZ=s900-c-k-c0x00ffffff-no-rj" alt="Top Hat" style="width:24px;height:24px;">
+                        <img src="https://yt3.googleusercontent.com/ytc/AIdro_nFFJRYR1kcvHz5IFQj9uKzbbWjBr8tGuShxsuvD3GZ=s900-c-k-c0x00ffffff-no-rj" alt="Top Hat">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Sr. Data Analyst, Top Hat Monocle</div>
                         <div class="timeline-years">2021–2022</div>
-                        Delivered predictive models, automated reporting, and actionable insights to product and marketing. Queried AWS S3, Redshift, and built dashboards in Looker, QuickSight, and automated reports.
+                        <ul>
+                            <li>Delivered predictive models, automated reporting, and actionable insights for product and marketing.</li>
+                            <li>Designed and implemented dashboards in Looker, QuickSight, and AWS Redshift.</li>
+                            <li>Automated data pipelines and QA processes for business reporting.</li>
+                        </ul>
                     </div>
                 </div>
+                <!-- Initiative Inc. -->
                 <div class="timeline-event odd">
                     <div class="timeline-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/7/76/Initiative_logo.png" alt="Initiative" style="width:24px;height:24px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/7/76/Initiative_logo.png" alt="Initiative">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Sr. Data Analyst, Initiative Inc.</div>
                         <div class="timeline-years">2019–2021</div>
-                        Insights on media performance, campaign optimization, and experimentation. Blended data from MS SQL, Azure, Google 360 Suite into live dashboards (Tableau, Data Studio, DOMO).
+                        <ul>
+                            <li>Led analytics on media performance, campaign optimization, and experimentation for major clients.</li>
+                            <li>Integrated data from SQL, Azure, Google 360 Suite, Tableau, Data Studio, and DOMO.</li>
+                            <li>Presented actionable recommendations to leadership and stakeholders.</li>
+                        </ul>
                     </div>
                 </div>
+                <!-- Aimia (Aeroplan) -->
                 <div class="timeline-event even">
                     <div class="timeline-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Aimia_Logo_2017.png" alt="Aimia" style="width:24px;height:24px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Aimia_Logo_2017.png" alt="Aimia">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Sr. Data Analyst, Aimia (Aeroplan)</div>
                         <div class="timeline-years">2017–2018</div>
-                        Loyalty and CRM analytics, churn/lifetime value models, and Tableau automation. Led KPI reporting and segmentation for targeted marketing.
+                        <ul>
+                            <li>Developed loyalty analytics, churn/CLV models, and Tableau automation for CRM.</li>
+                            <li>Led KPI reporting and customer segmentation for targeted marketing.</li>
+                            <li>Worked cross-functionally with data and product teams.</li>
+                        </ul>
                     </div>
                 </div>
+                <!-- Sears Canada -->
                 <div class="timeline-event odd">
                     <div class="timeline-dot">
-                        <img src="https://www.sears.ca/themes/sears/images/sears-logo.png" alt="Sears Canada" style="width:24px;height:24px;">
+                        <img src="https://www.sears.ca/themes/sears/images/sears-logo.png" alt="Sears Canada">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Data Analyst, Sears Canada</div>
                         <div class="timeline-years">2017</div>
-                        E-commerce analytics, recommendation engines, and performance dashboards for online retail.
+                        <ul>
+                            <li>Delivered e-commerce analytics, recommendation engine insights, and performance dashboards.</li>
+                            <li>Supported digital team on live reporting and marketing analytics.</li>
+                        </ul>
                     </div>
                 </div>
+                <!-- Magna International -->
                 <div class="timeline-event even">
                     <div class="timeline-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Magna_logo.png" alt="Magna" style="width:24px;height:24px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Magna_logo.png" alt="Magna">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Expense Analyst, Magna International</div>
                         <div class="timeline-years">2014–2016</div>
-                        Analyzed operating expenses, reconciled accounts, and performed business trend analysis across 60+ divisions.
+                        <ul>
+                            <li>Analyzed and reconciled operating expenses across 60+ business divisions.</li>
+                            <li>Created automated reports and performed business trend analysis.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -697,18 +735,18 @@
                 <div class="education-line"></div>
                 <div class="education-event odd">
                     <div class="education-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Leeds_University_Logo.png" alt="Leeds Logo" style="width:24px; height:24px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Leeds_University_Logo.png" alt="Leeds Logo">
                     </div>
                     <div class="education-content">
                         <div class="education-degree">MSc. in Data Science and Analytics</div>
                         <div class="education-years">2018–2019</div>
                         <div class="education-institution">University of Leeds</div>
-                        Graduated with 4.0 GPA. Advanced coursework in ML, analytics, and predictive modeling.
+                        Graduated with 4.0 GPA. Advanced coursework in machine learning, analytics, and predictive modeling.
                     </div>
                 </div>
                 <div class="education-event even">
                     <div class="education-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Toronto_Metropolitan_University_Logo.png" alt="TMU Logo" style="width:24px; height:24px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Toronto_Metropolitan_University_Logo.png" alt="TMU Logo">
                     </div>
                     <div class="education-content">
                         <div class="education-degree">Graduate Certificate: Data Analytics, Big Data & Predictive Analytics</div>
@@ -719,7 +757,7 @@
                 </div>
                 <div class="education-event odd">
                     <div class="education-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/1/1e/McMaster_University_Logo.png" alt="McMaster Logo" style="width:24px; height:24px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/1/1e/McMaster_University_Logo.png" alt="McMaster Logo">
                     </div>
                     <div class="education-content">
                         <div class="education-degree">Honours B.A. in Economics</div>
@@ -728,34 +766,12 @@
                         Focus in economics, data analysis, and statistics.
                     </div>
                 </div>
-                <div class="education-event even">
-                    <div class="education-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/MIT_logo.svg" alt="MITx" style="width:24px; height:24px;">
-                    </div>
-                    <div class="education-content">
-                        <div class="education-degree">Certificate: Data Science & Machine Learning</div>
-                        <div class="education-years">2025 (in progress)</div>
-                        <div class="education-institution">MITx</div>
-                        Advanced methods in ML, Python, and analytics (online).
-                    </div>
-                </div>
-                <div class="education-event odd">
-                    <div class="education-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" style="width:24px; height:24px;">
-                    </div>
-                    <div class="education-content">
-                        <div class="education-degree">Certificate: Advanced Data Analytics</div>
-                        <div class="education-years">2024</div>
-                        <div class="education-institution">Google (Online)</div>
-                        Completed professional certificate in applied analytics, data engineering, and BI tools.
-                    </div>
-                </div>
             </div>
         </section>
 
         <!-- Footer -->
         <div class="footer" style="text-align:center;color:#aea77a;margin-top:60px;font-size:0.97em;padding-bottom:16px;">
-            &copy; 2024 Aryan Kaushik &mdash; Portfolio. Made with <span style="color:var(--accent)">❤</span> and Python.
+            &copy; 2024 Aryan Kaushik &mdash; Portfolio.
             <span style="margin-left:22px; font-size:1em;"><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="color:var(--accent);text-decoration:none;">Back to Top</a></span>
         </div>
     </div>

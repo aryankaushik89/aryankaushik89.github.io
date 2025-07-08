@@ -39,7 +39,6 @@
             margin: 0;
             min-height: 100vh;
         }
-        /* Sticky Header */
         .header {
             position: fixed;
             top: 0; left: 0; width: 100vw;
@@ -94,46 +93,49 @@
             background: var(--accent);
             border-radius: 2px;
         }
-        /* Main container */
         .container {
             max-width: var(--max-width);
             margin: 0 auto;
             padding: 105px 32px 60px 32px;
             background: none;
         }
-        /* Overview Section - left justified */
+        /* Section titles: all left-aligned and identical */
+        .section-title {
+            font-size: 2.65em;
+            font-weight: 900;
+            color: var(--text);
+            letter-spacing: -2.2px;
+            margin-bottom: 22px;
+            margin-top: 0;
+            text-align: left;
+        }
+        /* Overview: header, then profile+bio block */
         .overview-section {
+            margin-bottom: 60px;
+        }
+        .overview-row {
             display: flex;
             align-items: flex-start;
             gap: 42px;
-            margin-bottom: 65px;
         }
         .overview-img {
-            width: 122px;
-            height: 122px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
             border-radius: 50%;
             border: 3.2px solid var(--accent);
             box-shadow: 0 4px 24px #e1b16933, 0 2px 10px #2020248a;
-            margin-top: 8px;
+            margin-top: 6px;
             flex-shrink: 0;
         }
         .overview-right {
             flex: 1;
         }
-        .overview-title {
-            font-size: 2.60em;
-            font-weight: 900;
-            margin-bottom: 8px;
-            color: var(--text);
-            letter-spacing: -2px;
-            text-align: left;
-        }
         .overview-bio {
-            font-size: 1.16em;
+            font-size: 1.17em;
             color: var(--muted);
-            margin-bottom: 23px;
-            line-height: 1.55;
+            margin-bottom: 22px;
+            line-height: 1.54;
             max-width: 610px;
             text-align: left;
         }
@@ -165,31 +167,20 @@
             transition: color 0.14s, transform 0.12s;
         }
         .social-row a:hover { color: #fff; transform: scale(1.11);}
-        /* Section Titles */
-        .section-title {
-            font-size: 2.11em;
-            font-weight: 900;
-            color: var(--text);
-            letter-spacing: -2px;
-            margin-bottom: 36px;
-            margin-top: 0;
-            text-align: left;
-        }
         /* Core Expertise Cards */
         .core-section {
-            margin-bottom: 32px;
+            margin-bottom: 40px;
         }
         .core-cards-row {
-            display: flex;
-            gap: 38px;
-            justify-content: flex-start;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
             margin-bottom: 38px;
         }
         .core-card {
             background: linear-gradient(135deg,#232343 60%,#191726 100%);
             border-radius: 20px;
-            width: 188px; min-width: 145px; max-width: 210px;
-            height: 170px;
+            height: 175px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -215,26 +206,21 @@
             color: var(--text);
             margin-bottom: 4px;
         }
-        /* Tools/Software Icons (2 rows of 5) */
+        /* Tools/Software Icons (2 rows of 5, always aligned) */
         .tools-section {
-            margin-bottom: 55px;
+            margin-bottom: 60px;
         }
         .tools-grid {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 18px;
-        }
-        .tools-row {
-            display: flex;
-            gap: 44px;
-            justify-content: flex-start;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 26px 40px;
+            width: 100%;
         }
         .tool-col {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 88px;
+            width: 100%;
         }
         .tool-bubble {
             width: 66px; height: 66px;
@@ -244,7 +230,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 6px;
+            margin-bottom: 7px;
             transition: box-shadow 0.19s, transform 0.13s;
             border: 2.5px solid #28285a;
             position: relative;
@@ -281,25 +267,24 @@
             text-align: left;
         }
         .projects-title {
-            font-size: 2.1em;
+            font-size: 2.65em;
             font-weight: 900;
             color: var(--text);
             margin-bottom: 28px;
-            letter-spacing: -2px;
+            letter-spacing: -2.2px;
             text-align: left;
         }
         .projects-grid {
-            display: flex;
-            gap: 38px;
-            justify-content: flex-start;
-            flex-wrap: nowrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            width: 100%;
         }
         .project-card {
             background: var(--project-card-bg);
             border-radius: 18px;
             box-shadow: 0 4px 18px #19172625;
             overflow: hidden;
-            width: 330px;
             display: flex;
             flex-direction: column;
             cursor: pointer;
@@ -363,11 +348,11 @@
             margin: 60px 0 90px 0;
         }
         .timeline-title {
-            font-size: 2.07em;
+            font-size: 2.65em;
             font-weight: 900;
             color: var(--text);
             margin-bottom: 37px;
-            letter-spacing: -2px;
+            letter-spacing: -2.2px;
             text-align: left;
         }
         .timeline {
@@ -441,66 +426,133 @@
             margin-bottom: 4px;
             font-weight: 700;
         }
+        /* Education timeline uses same styling */
+        .education-section {
+            margin: 55px 0 90px 0;
+        }
+        .education-title {
+            font-size: 2.65em;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 37px;
+            letter-spacing: -2.2px;
+            text-align: left;
+        }
+        .education {
+            position: relative;
+            width: 100%;
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+        .education-line {
+            position: absolute;
+            left: 50%; top: 0; bottom: 0;
+            width: 4px;
+            background: linear-gradient(var(--accent) 0%, #fff0 90%);
+            transform: translateX(-50%);
+            z-index: 0;
+            border-radius: 2px;
+        }
+        .education-event {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-bottom: 48px;
+            position: relative;
+            text-align: left;
+        }
+        .education-event.odd {
+            left: 0;
+            align-items: flex-end;
+        }
+        .education-event.even {
+            left: 50%;
+            align-items: flex-start;
+        }
+        .education-dot {
+            width: 36px; height: 36px;
+            background: #fff;
+            border: 3.5px solid var(--timeline-dot);
+            border-radius: 50%;
+            box-shadow: 0 2px 10px #e1b16955;
+            position: absolute;
+            top: 14px;
+            right: -18px;
+            z-index: 2;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .education-event.even .education-dot {
+            left: -18px; right: auto;
+        }
+        .education-content {
+            background: var(--timeline-card-bg);
+            border-radius: 16px;
+            padding: 20px 28px 18px 22px;
+            box-shadow: 0 3px 14px #1b1b2e2c;
+            margin-left: 0;
+            min-width: 230px;
+            max-width: 340px;
+            margin-top: 0;
+            color: var(--text);
+        }
+        .education-degree {
+            font-weight: 800;
+            color: var(--accent);
+            font-size: 1.07em;
+            margin-bottom: 4px;
+        }
+        .education-years {
+            font-size: 0.95em;
+            color: #ffe191cc;
+            margin-top: 9px;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+        .education-institution {
+            font-size: 1.07em;
+            color: #fff;
+            margin-top: 2px;
+            font-weight: 600;
+        }
         /* Responsive Design */
         @media (max-width: 1240px) {
             .container { max-width: 97vw; }
             .header-inner { max-width: 97vw;}
-            .timeline { max-width: 100vw;}
+            .timeline, .education { max-width: 100vw;}
         }
         @media (max-width: 1050px) {
             .container { padding: 95px 10px 50px 10px;}
-            .core-cards-row, .tools-row, .projects-grid { gap: 18px;}
+            .core-cards-row, .tools-grid, .projects-grid { gap: 18px;}
+            .core-cards-row, .tools-grid, .projects-grid { width: 100%; }
         }
         @media (max-width: 950px) {
-            .core-cards-row { gap: 8px;}
-            .projects-grid { gap: 10px;}
-            .tools-row { gap: 7px;}
-            .core-card, .project-card { width: 32vw; min-width: 155px; max-width: 240px;}
+            .core-cards-row, .tools-grid, .projects-grid { gap: 8px;}
+        }
+        @media (max-width: 950px) {
+            .core-cards-row { grid-template-columns: 1fr 1fr; }
+            .tools-grid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr;}
+            .projects-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 850px) {
-            .overview-section { flex-direction: column; gap: 20px; align-items: flex-start;}
+            .overview-row { flex-direction: column; gap: 20px; align-items: flex-start;}
             .overview-img { margin-bottom: 0;}
-            .overview-title { font-size: 1.55em;}
-            .core-cards-row { flex-direction: column; gap: 20px;}
-            .tools-grid, .tools-row { align-items: flex-start;}
-            .tools-row { gap: 17px;}
-            .project-card { width: 99vw; min-width: 140px;}
-            .projects-grid { flex-wrap: wrap;}
+            .section-title, .projects-title, .timeline-title, .education-title { font-size: 1.55em;}
         }
         @media (max-width: 700px) {
             .container { padding: 78px 2vw 20px 2vw;}
-            .core-card { height: 110px;}
-            .project-card { width: 98vw;}
-        }
-        @media (max-width: 700px) {
-            .header-inner { padding: 0 6px;}
-        }
-        @media (max-width: 1100px) {
-            .projects-grid { flex-wrap: wrap; }
-            .project-card { width: 310px;}
-        }
-        @media (max-width: 1020px) {
-            .projects-grid { flex-wrap: wrap; }
-        }
-        @media (max-width: 990px) {
-            .projects-grid { flex-wrap: wrap; }
-        }
-        @media (max-width: 970px) {
-            .projects-grid { flex-wrap: wrap;}
-        }
-        @media (max-width: 950px) {
-            .projects-grid { flex-wrap: wrap; }
+            .core-cards-row, .tools-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr;}
         }
         @media (max-width: 880px) {
-            .timeline-event, .timeline-event.even { width: 100%; left: 0; align-items: flex-end;}
-            .timeline-dot { right: -18px; left:auto;}
-            .timeline-event.even .timeline-dot { left:auto; right:-18px;}
-            .timeline-content { margin-left:0; margin-right:0;}
-            .timeline-line { left: 21px; transform: none;}
+            .timeline-event, .timeline-event.even, .education-event, .education-event.even { width: 100%; left: 0; align-items: flex-end;}
+            .timeline-dot, .education-dot { right: -18px; left:auto;}
+            .timeline-event.even .timeline-dot, .education-event.even .education-dot { left:auto; right:-18px;}
+            .timeline-content, .education-content { margin-left:0; margin-right:0;}
+            .timeline-line, .education-line { left: 21px; transform: none;}
         }
         @media (max-width: 650px) {
-            .core-card, .project-card { width: 98vw;}
-            .projects-grid { flex-direction: column;}
+            .container { padding: 30px 1vw 20px 1vw;}
         }
     </style>
 </head>
@@ -519,23 +571,25 @@
         </div>
     </div>
     <div class="container">
-        <!-- Overview Section -->
+        <!-- Overview Header and Block -->
         <section class="overview-section" id="overview">
-            <img src="profile_picture.png" alt="Aryan Kaushik" class="overview-img"/>
-            <div class="overview-right">
-                <div class="overview-title">Overview</div>
-                <div class="overview-bio">
-                    Data Scientist with 8+ years experience in advanced analytics, fraud risk modeling, and machine learning.<br>
-                    Python, Spark, SQL, visualization, and AI agent dev. Passionate about building ML solutions that actually impact people and business.
-                </div>
-                <a href="Aryan_Kaushik_Resume.pdf" class="resume-link" download>
-                    <i class="fa fa-download"></i> Download Resume (PDF)
-                </a>
-                <div class="social-row">
-                    <a href="https://www.linkedin.com/in/aryankaushik/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/aryankaushik89" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="#" target="_blank" title="Kaggle (coming soon)"><i class="fab fa-kaggle"></i></a>
-                    <a href="mailto:aryan23.kaushik@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <div class="section-title">Overview</div>
+            <div class="overview-row">
+                <img src="profile_picture.png" alt="Aryan Kaushik" class="overview-img"/>
+                <div class="overview-right">
+                    <div class="overview-bio">
+                        Data Scientist with 8+ years experience in advanced analytics, fraud risk modeling, and machine learning.<br>
+                        Python, Spark, SQL, visualization, and AI agent dev. Passionate about building ML solutions that actually impact people and business.
+                    </div>
+                    <a href="Aryan_Kaushik_Resume.pdf" class="resume-link" download>
+                        <i class="fa fa-download"></i> Download Resume (PDF)
+                    </a>
+                    <div class="social-row">
+                        <a href="https://www.linkedin.com/in/aryankaushik/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/aryankaushik89" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank" title="Kaggle (coming soon)"><i class="fab fa-kaggle"></i></a>
+                        <a href="mailto:aryan23.kaushik@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -566,49 +620,45 @@
         <!-- Software/Tools Icon Grid -->
         <section class="tools-section">
             <div class="tools-grid">
-                <div class="tools-row">
-                    <div class="tool-col">
-                        <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"/></div>
-                        <div class="tool-label">Python</div>
-                    </div>
-                    <div class="tool-col">
-                        <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R"/></div>
-                        <div class="tool-label">R</div>
-                    </div>
-                    <div class="tool-col">
-                        <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache-spark/apache-spark-original.svg" alt="Spark"/></div>
-                        <div class="tool-label">Spark</div>
-                    </div>
-                    <div class="tool-col">
-                        <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL"/></div>
-                        <div class="tool-label">SQL</div>
-                    </div>
-                    <div class="tool-col">
-                        <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS"/></div>
-                        <div class="tool-label">AWS</div>
-                    </div>
+                <div class="tool-col">
+                    <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"/></div>
+                    <div class="tool-label">Python</div>
                 </div>
-                <div class="tools-row">
-                    <div class="tool-col">
-                        <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tableau/tableau-original.svg" alt="Tableau"/></div>
-                        <div class="tool-label">Tableau</div>
-                    </div>
-                    <div class="tool-col">
-                        <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Data Studio"/></div>
-                        <div class="tool-label">Data Studio</div>
-                    </div>
-                    <div class="tool-col">
-                        <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/databricks/databricks-original.svg" alt="Databricks"/></div>
-                        <div class="tool-label">Databricks</div>
-                    </div>
-                    <div class="tool-col">
-                        <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Looker"/></div>
-                        <div class="tool-label">Looker</div>
-                    </div>
-                    <div class="tool-col">
-                        <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" alt="PowerBI"/></div>
-                        <div class="tool-label">PowerBI</div>
-                    </div>
+                <div class="tool-col">
+                    <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R"/></div>
+                    <div class="tool-label">R</div>
+                </div>
+                <div class="tool-col">
+                    <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache-spark/apache-spark-original.svg" alt="Spark"/></div>
+                    <div class="tool-label">Spark</div>
+                </div>
+                <div class="tool-col">
+                    <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL"/></div>
+                    <div class="tool-label">SQL</div>
+                </div>
+                <div class="tool-col">
+                    <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS"/></div>
+                    <div class="tool-label">AWS</div>
+                </div>
+                <div class="tool-col">
+                    <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tableau/tableau-original.svg" alt="Tableau"/></div>
+                    <div class="tool-label">Tableau</div>
+                </div>
+                <div class="tool-col">
+                    <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Data Studio"/></div>
+                    <div class="tool-label">Data Studio</div>
+                </div>
+                <div class="tool-col">
+                    <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/databricks/databricks-original.svg" alt="Databricks"/></div>
+                    <div class="tool-label">Databricks</div>
+                </div>
+                <div class="tool-col">
+                    <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Looker"/></div>
+                    <div class="tool-label">Looker</div>
+                </div>
+                <div class="tool-col">
+                    <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" alt="PowerBI"/></div>
+                    <div class="tool-label">PowerBI</div>
                 </div>
             </div>
         </section>
@@ -738,6 +788,38 @@
             </div>
         </section>
 
+        <!-- Education Section (Timeline Style) -->
+        <section class="education-section" id="education">
+            <div class="education-title">Education</div>
+            <div class="education">
+                <div class="education-line"></div>
+                <!-- Example event, replace src for logos if you wish -->
+                <div class="education-event odd">
+                    <div class="education-dot">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Logo_University_of_Toronto.png" alt="UofT Logo" style="width:24px; height:24px;">
+                    </div>
+                    <div class="education-content">
+                        <div class="education-degree">MSc, Analytics (Data Science & ML)</div>
+                        <div class="education-years">2016–2018</div>
+                        <div class="education-institution">University of Toronto</div>
+                        <div>Relevant coursework: Machine Learning, Data Engineering, Predictive Modelling, Data Mining.</div>
+                    </div>
+                </div>
+                <div class="education-event even">
+                    <div class="education-dot">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/York_University_Logo.svg" alt="York Logo" style="width:24px; height:24px;">
+                    </div>
+                    <div class="education-content">
+                        <div class="education-degree">BSc, Statistics & Computer Science</div>
+                        <div class="education-years">2010–2014</div>
+                        <div class="education-institution">York University</div>
+                        <div>Specialization in Data Analysis, Probability Theory, and Advanced Statistical Computing.</div>
+                    </div>
+                </div>
+                <!-- Add more schools/degrees below, or swap logos as needed -->
+            </div>
+        </section>
+
         <!-- Footer -->
         <div class="footer" style="text-align:center;color:#aea77a;margin-top:60px;font-size:0.97em;padding-bottom:16px;">
             &copy; 2024 Aryan Kaushik &mdash; Portfolio. Made with <span style="color:var(--accent)">❤</span> and Python.
@@ -748,7 +830,7 @@
     <!-- JS: Nav highlight, timeline animation -->
     <script>
         // Nav active state
-        const sections = ['overview','projects','work'];
+        const sections = ['overview','projects','work','education'];
         const navLinks = document.querySelectorAll('.nav-link');
         window.addEventListener('scroll', () => {
             let fromTop = window.scrollY + 120;
@@ -756,13 +838,13 @@
                 const section = document.getElementById(sec);
                 if (section && section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
                     navLinks.forEach(l=>l.classList.remove('active'));
-                    navLinks[i].classList.add('active');
+                    if (navLinks[i]) navLinks[i].classList.add('active');
                 }
             });
         });
         // Timeline reveal
         function revealTimeline() {
-            document.querySelectorAll('.timeline-event').forEach((ev, idx) => {
+            document.querySelectorAll('.timeline-event, .education-event').forEach((ev, idx) => {
                 const rect = ev.getBoundingClientRect();
                 if (rect.top < window.innerHeight - 60) {
                     ev.style.opacity = 1;

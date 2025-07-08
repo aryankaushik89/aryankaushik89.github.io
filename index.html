@@ -97,7 +97,6 @@
             padding: 105px 32px 60px 32px;
             background: none;
         }
-        section { margin-bottom: 190px; }
         .section-title {
             font-size: 2.65em;
             font-weight: 900;
@@ -107,15 +106,17 @@
             margin-top: 0;
             text-align: left;
         }
-        .overview-section { margin-bottom: 90px !important; }
+        .overview-section {
+            margin-bottom: 120px; /* DOUBLE spacing after section */
+        }
         .overview-row {
             display: flex;
             align-items: flex-start;
             gap: 42px;
         }
         .overview-img {
-            width: 152px;
-            height: 152px;
+            width: 128px;
+            height: 128px;
             object-fit: cover;
             border-radius: 22px;
             border: 3.2px solid var(--accent);
@@ -125,7 +126,9 @@
             margin-bottom: 0;
             aspect-ratio: 1/1;
         }
-        .overview-right { flex: 1; }
+        .overview-right {
+            flex: 1;
+        }
         .overview-bio {
             font-size: 1.16em;
             color: var(--muted);
@@ -163,12 +166,12 @@
             transition: color 0.14s, transform 0.12s;
         }
         .social-row a:hover { color: #fff; transform: scale(1.11);}
-        .core-section { margin-bottom: 80px !important; }
+        .core-section { margin-bottom: 120px;}   /* DOUBLE space */
         .core-cards-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 40px;
-            margin-bottom: 55px;
+            margin-bottom: 38px;
             width: 100%;
         }
         .core-card {
@@ -190,22 +193,23 @@
             z-index: 3;
         }
         .core-card svg {
-            width: 60px;
-            height: 60px;
+            width: 48px;
+            height: 48px;
             margin-bottom: 17px;
         }
         .core-label {
-            font-size: 1.15em;
+            font-size: 1.13em;
             font-weight: 700;
             color: var(--text);
             margin-bottom: 4px;
         }
-        .tools-section { margin-bottom: 95px !important; }
+        .tools-section { margin-bottom: 120px;} /* DOUBLE space */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 36px 32px;
+            gap: 36px 30px; /* increase gap */
             width: 100%;
+            justify-items: center;
         }
         .tool-col {
             display: flex;
@@ -214,26 +218,27 @@
             width: 100%;
         }
         .tool-bubble {
-            width: 92px; height: 92px;   /* 65% bigger */
+            width: 112px; /* 100% bigger (was 56px) */
+            height: 112px;
             border-radius: 50%;
             background: linear-gradient(135deg, #232343 55%, #191726 100%);
-            box-shadow: 0 2px 11px #19172622;
+            box-shadow: 0 2px 16px #19172622;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 9px;
+            margin-bottom: 14px;
             transition: box-shadow 0.19s, transform 0.13s;
-            border: 2.5px solid #28285a;
+            border: 4px solid #28285a;
             position: relative;
             cursor: pointer;
         }
         .tool-bubble:hover {
-            box-shadow: 0 5px 25px #ffe19122, 0 1px 4px #ffe19166;
-            transform: translateY(-4px) scale(1.055);
+            box-shadow: 0 8px 30px #ffe19122, 0 1px 4px #ffe19166;
+            transform: translateY(-4px) scale(1.065);
         }
         .tool-icon {
-            width: 42px;
-            height: 42px;
+            width: 54px; /* doubled */
+            height: 54px;
             object-fit: contain;
             filter: grayscale(0.06) brightness(1.19) drop-shadow(0 1px 3px #ffe19122);
         }
@@ -241,10 +246,10 @@
             color: var(--text);
             font-size: 1.12em;
             font-weight: 500;
-            margin-top: 6px;
+            margin-top: 9px;
             text-align: center;
         }
-        .projects-section { margin: 92px 0 92px 0 !important;}
+        .projects-section { margin: 120px 0 120px 0;} /* DOUBLE space */
         .projects-title {
             font-size: 2.65em;
             font-weight: 900;
@@ -323,7 +328,7 @@
         .project-card-tag.gold { color: var(--hashtag-gold);}
         .project-card-tag.purple { color: var(--hashtag-purple);}
         /* Timeline Section */
-        .timeline-section { margin: 110px 0 120px 0 !important;}
+        .timeline-section { margin: 120px 0 120px 0;} /* DOUBLE space */
         .timeline-title, .education-title {
             font-size: 2.65em;
             font-weight: 900;
@@ -352,10 +357,10 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            margin-bottom: 70px;
+            margin-bottom: 86px; /* More vertical gap between events */
             position: relative;
             text-align: left;
-            min-height: 110px;
+            min-height: 140px;
         }
         .timeline-event.odd, .education-event.odd {
             left: 0;
@@ -366,64 +371,52 @@
             align-items: flex-start;
         }
         .timeline-dot, .education-dot {
-            width: 62px; height: 62px; /* 65% bigger */
+            width: 76px; /* 100% bigger (was 38px) */
+            height: 76px;
             background: #fff;
-            border: 4px solid var(--timeline-dot);
+            border: 7px solid var(--timeline-dot);
             border-radius: 50%;
-            box-shadow: 0 2px 10px #e1b16955;
+            box-shadow: 0 4px 20px #e1b16955;
             position: absolute;
-            top: 26px;
-            right: -44px;
+            top: 30px;
+            right: -65px; /* Add much more space between dot and content */
             z-index: 2;
             display: flex; align-items: center; justify-content: center;
         }
         .timeline-event.even .timeline-dot, .education-event.even .education-dot {
-            left: -44px; right: auto;
-        }
-        .timeline-dot img, .education-dot img {
-            width: 39px; height: 39px;
-            object-fit: contain;
+            left: -65px; right: auto;
         }
         .timeline-content, .education-content {
             background: var(--timeline-card-bg);
             border-radius: 16px;
-            padding: 26px 38px 24px 34px;
+            padding: 30px 38px 26px 32px; /* More padding */
             box-shadow: 0 3px 14px #1b1b2e2c;
             margin-left: 0;
             min-width: 230px;
-            max-width: 395px;
+            max-width: 350px;
             margin-top: 0;
             color: var(--text);
         }
         .timeline-job, .education-degree {
             font-weight: 800;
             color: var(--accent);
-            font-size: 1.14em;
-            margin-bottom: 7px;
+            font-size: 1.15em;
+            margin-bottom: 4px;
         }
         .timeline-years, .education-years {
             font-size: 1em;
             color: #ffe191cc;
-            margin-top: 8px;
-            margin-bottom: 7px;
+            margin-top: 9px;
+            margin-bottom: 4px;
             font-weight: 700;
         }
-        .timeline-content ul, .education-content ul {
-            margin: 7px 0 0 0;
-            padding-left: 20px;
-        }
-        .timeline-content ul li {
-            color: #f7f6e6;
-            font-size: 1.08em;
-            margin-bottom: 5px;
-            line-height: 1.4;
-        }
         .education-institution {
-            font-size: 1.13em;
+            font-size: 1.07em;
             color: #fff;
-            margin-top: 6px;
+            margin-top: 2px;
             font-weight: 600;
         }
+        /* Responsive */
         @media (max-width: 1240px) {
             .container { max-width: 97vw; }
             .header-inner { max-width: 97vw;}
@@ -440,15 +433,17 @@
         }
         @media (max-width: 880px) {
             .timeline-event, .timeline-event.even, .education-event, .education-event.even { width: 100%; left: 0; align-items: flex-end;}
-            .timeline-dot, .education-dot { right: -25px; left:auto;}
-            .timeline-event.even .timeline-dot, .education-event.even .education-dot { left:auto; right:-25px;}
+            .timeline-dot, .education-dot { right: -40px; left:auto;}
+            .timeline-event.even .timeline-dot, .education-event.even .education-dot { left:auto; right:-40px;}
             .timeline-content, .education-content { margin-left:0; margin-right:0;}
-            .timeline-line, .education-line { left: 31px; transform: none;}
+            .timeline-line, .education-line { left: 21px; transform: none;}
         }
         @media (max-width: 700px) {
             .container { padding: 78px 2vw 20px 2vw;}
             .core-cards-row, .tools-grid { grid-template-columns: 1fr; }
             .projects-grid { grid-template-columns: 1fr;}
+            .timeline-dot, .education-dot { width: 56px; height: 56px; right:-34px; border-width:5px;}
+            .timeline-event.even .timeline-dot, .education-event.even .education-dot { left:auto; right:-34px;}
         }
         @media (max-width: 650px) {
             .container { padding: 30px 1vw 20px 1vw;}
@@ -474,7 +469,8 @@
         <section class="overview-section" id="overview">
             <div class="section-title">Overview</div>
             <div class="overview-row">
-                <img src="profile_picture.png" alt="Aryan Kaushik" class="overview-img">
+                <img src="profile_picture.png" alt="Aryan Kaushik" class="overview-img"
+                     style="object-fit: cover; background:#191726; aspect-ratio: 1 / 1;">
                 <div class="overview-right">
                     <div class="overview-bio">
                         Data scientist with 8+ years of experience delivering advanced analytics, predictive models, and business intelligence for enterprise clients. Focused on making complex data actionable, with hands-on leadership of end-to-end ML projects in fraud detection, marketing analytics, and product optimization. Passionate about scalable data engineering, automation, and storytelling with data.
@@ -546,6 +542,7 @@
                     <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Looker"/></div>
                     <div class="tool-label">Looker</div>
                 </div>
+                <!-- Row 2 -->
                 <div class="tool-col">
                     <div class="tool-bubble"><img class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/8/88/Amazon_QuickSight_logo.svg" alt="QuickSight"/></div>
                     <div class="tool-label">QuickSight</div>
@@ -637,91 +634,81 @@
             <div class="timeline-title">Experience</div>
             <div class="timeline">
                 <div class="timeline-line"></div>
-                <!-- Deduce Inc. -->
                 <div class="timeline-event odd">
                     <div class="timeline-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Deduce_logo.png" alt="Deduce">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Deduce_logo.png" alt="Deduce" style="width:44px;height:44px;">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Data Scientist, Deduce Inc. (acquired by CHEQ)</div>
                         <div class="timeline-years">2022–2024</div>
-                        <ul>
-                            <li>Led all data science analytics for fraud/risk, integrating client and proprietary data with ML features.</li>
-                            <li>Built and deployed fraud detection models and analytics pipelines using Python, Spark, and cloud services.</li>
-                            <li>Collaborated with product, engineering, and customer teams to drive adoption of insights.</li>
+                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                            <li>Led or collaborated on all POV analyses, integrating proprietary and client data, engineering features, and applying ML models using Python and Spark to mitigate fraud risks and reduce friction.</li>
+                            <li>Built Spark ML pipelines, developed fraud dashboards, performed advanced data QA, and delivered client-facing analytics and presentations.</li>
                         </ul>
                     </div>
                 </div>
-                <!-- Top Hat Monocle -->
                 <div class="timeline-event even">
                     <div class="timeline-dot">
-                        <img src="https://yt3.googleusercontent.com/ytc/AIdro_nFFJRYR1kcvHz5IFQj9uKzbbWjBr8tGuShxsuvD3GZ=s900-c-k-c0x00ffffff-no-rj" alt="Top Hat">
+                        <img src="https://yt3.googleusercontent.com/ytc/AIdro_nFFJRYR1kcvHz5IFQj9uKzbbWjBr8tGuShxsuvD3GZ=s900-c-k-c0x00ffffff-no-rj" alt="Top Hat" style="width:44px;height:44px;">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Sr. Data Analyst, Top Hat Monocle</div>
                         <div class="timeline-years">2021–2022</div>
-                        <ul>
-                            <li>Delivered predictive models, automated reporting, and actionable insights for product and marketing.</li>
-                            <li>Designed and implemented dashboards in Looker, QuickSight, and AWS Redshift.</li>
-                            <li>Automated data pipelines and QA processes for business reporting.</li>
+                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                            <li>Delivered predictive models, automated reporting, and actionable insights to product and marketing. Queried AWS S3, Redshift, and built dashboards in Looker, QuickSight, and automated reports.</li>
+                            <li>Supported growth analytics, marketing campaign performance, and product experiments.</li>
                         </ul>
                     </div>
                 </div>
-                <!-- Initiative Inc. -->
                 <div class="timeline-event odd">
                     <div class="timeline-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/7/76/Initiative_logo.png" alt="Initiative">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/7/76/Initiative_logo.png" alt="Initiative" style="width:44px;height:44px;">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Sr. Data Analyst, Initiative Inc.</div>
                         <div class="timeline-years">2019–2021</div>
-                        <ul>
-                            <li>Led analytics on media performance, campaign optimization, and experimentation for major clients.</li>
-                            <li>Integrated data from SQL, Azure, Google 360 Suite, Tableau, Data Studio, and DOMO.</li>
-                            <li>Presented actionable recommendations to leadership and stakeholders.</li>
+                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                            <li>Insights on media performance, campaign optimization, and experimentation. Blended data from MS SQL, Azure, Google 360 Suite into live dashboards (Tableau, Data Studio, DOMO).</li>
+                            <li>Designed advanced marketing analytics, built interactive Tableau dashboards, and automated data pulls.</li>
                         </ul>
                     </div>
                 </div>
-                <!-- Aimia (Aeroplan) -->
                 <div class="timeline-event even">
                     <div class="timeline-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Aimia_Logo_2017.png" alt="Aimia">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Aimia_Logo_2017.png" alt="Aimia" style="width:44px;height:44px;">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Sr. Data Analyst, Aimia (Aeroplan)</div>
                         <div class="timeline-years">2017–2018</div>
-                        <ul>
-                            <li>Developed loyalty analytics, churn/CLV models, and Tableau automation for CRM.</li>
-                            <li>Led KPI reporting and customer segmentation for targeted marketing.</li>
-                            <li>Worked cross-functionally with data and product teams.</li>
+                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                            <li>Loyalty and CRM analytics, churn/lifetime value models, and Tableau automation. Led KPI reporting and segmentation for targeted marketing.</li>
+                            <li>Built churn/CLV models, automated Tableau reporting, and performed customer segmentation for retention.</li>
                         </ul>
                     </div>
                 </div>
-                <!-- Sears Canada -->
                 <div class="timeline-event odd">
                     <div class="timeline-dot">
-                        <img src="https://www.sears.ca/themes/sears/images/sears-logo.png" alt="Sears Canada">
+                        <img src="https://www.sears.ca/themes/sears/images/sears-logo.png" alt="Sears Canada" style="width:44px;height:44px;">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Data Analyst, Sears Canada</div>
                         <div class="timeline-years">2017</div>
-                        <ul>
-                            <li>Delivered e-commerce analytics, recommendation engine insights, and performance dashboards.</li>
-                            <li>Supported digital team on live reporting and marketing analytics.</li>
+                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                            <li>E-commerce analytics, recommendation engines, and performance dashboards for online retail.</li>
+                            <li>Developed ML recommenders, built campaign dashboards, and live performance reporting.</li>
                         </ul>
                     </div>
                 </div>
-                <!-- Magna International -->
                 <div class="timeline-event even">
                     <div class="timeline-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Magna_logo.png" alt="Magna">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Magna_logo.png" alt="Magna" style="width:44px;height:44px;">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Expense Analyst, Magna International</div>
                         <div class="timeline-years">2014–2016</div>
-                        <ul>
-                            <li>Analyzed and reconciled operating expenses across 60+ business divisions.</li>
-                            <li>Created automated reports and performed business trend analysis.</li>
+                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                            <li>Analyzed operating expenses, reconciled accounts, and performed business trend analysis across 60+ divisions.</li>
+                            <li>Automated reporting, performed financial forecasting and process optimization.</li>
                         </ul>
                     </div>
                 </div>
@@ -735,18 +722,18 @@
                 <div class="education-line"></div>
                 <div class="education-event odd">
                     <div class="education-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Leeds_University_Logo.png" alt="Leeds Logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Leeds_University_Logo.png" alt="Leeds Logo" style="width:44px; height:44px;">
                     </div>
                     <div class="education-content">
                         <div class="education-degree">MSc. in Data Science and Analytics</div>
                         <div class="education-years">2018–2019</div>
                         <div class="education-institution">University of Leeds</div>
-                        Graduated with 4.0 GPA. Advanced coursework in machine learning, analytics, and predictive modeling.
+                        Graduated with 4.0 GPA. Advanced coursework in ML, analytics, and predictive modeling.
                     </div>
                 </div>
                 <div class="education-event even">
                     <div class="education-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Toronto_Metropolitan_University_Logo.png" alt="TMU Logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Toronto_Metropolitan_University_Logo.png" alt="TMU Logo" style="width:44px; height:44px;">
                     </div>
                     <div class="education-content">
                         <div class="education-degree">Graduate Certificate: Data Analytics, Big Data & Predictive Analytics</div>
@@ -757,7 +744,7 @@
                 </div>
                 <div class="education-event odd">
                     <div class="education-dot">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/1/1e/McMaster_University_Logo.png" alt="McMaster Logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/1/1e/McMaster_University_Logo.png" alt="McMaster Logo" style="width:44px; height:44px;">
                     </div>
                     <div class="education-content">
                         <div class="education-degree">Honours B.A. in Economics</div>

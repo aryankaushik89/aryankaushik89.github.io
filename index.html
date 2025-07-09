@@ -155,18 +155,20 @@
         .resume-link i { margin-right: 7px;}
         .resume-link:hover { background: linear-gradient(90deg, var(--accent-dark), var(--accent-light)); color: #fff; transform: scale(1.04);}
         .social-row {
-            margin-top: 5px;
-            text-align: left;
+            margin-top: 12px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
         }
         .social-row a {
-            margin-right: 15px;
-            font-size: 1.29em;
+            font-size: 1.45em;
             color: var(--accent);
             display: inline-block;
             transition: color 0.14s, transform 0.12s;
         }
         .social-row a:hover { color: #fff; transform: scale(1.11);}
-        .core-section { margin-bottom: 100px;}   /* DOUBLE space */
+        .core-section { margin-bottom: 100px;}
         .core-cards-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -192,10 +194,12 @@
             transform: translateY(-8px) scale(1.035);
             z-index: 3;
         }
-        .core-card svg {
-            width: 48px;
-            height: 48px;
+        .core-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
             margin-bottom: 17px;
+            display: block;
         }
         .core-label {
             font-size: 1.13em;
@@ -218,7 +222,7 @@
             width: 100%;
         }
         .tool-bubble {
-            width: 90px; /* 100% bigger (was 56px) */
+            width: 90px;
             height: 90px;
             border-radius: 50%;
             background: linear-gradient(135deg, #232343 55%, #191726 100%);
@@ -237,7 +241,7 @@
             transform: translateY(-4px) scale(1.065);
         }
         .tool-icon {
-            width: 40px; /* doubled */
+            width: 40px;
             height: 40px;
             object-fit: contain;
             filter: grayscale(0.06) brightness(1.19) drop-shadow(0 1px 3px #ffe19122);
@@ -249,7 +253,7 @@
             margin-top: 9px;
             text-align: center;
         }
-        .projects-section { margin: 100px 0 120px 0;} /* DOUBLE space */
+        .projects-section { margin: 100px 0 120px 0;}
         .projects-title {
             font-size: 2.65em;
             font-weight: 900;
@@ -328,7 +332,7 @@
         .project-card-tag.gold { color: var(--hashtag-gold);}
         .project-card-tag.purple { color: var(--hashtag-purple);}
         /* Timeline Section */
-        .timeline-section { margin: 120px 0 120px 0;} /* DOUBLE space */
+        .timeline-section { margin: 120px 0 120px 0;}
         .timeline-title, .education-title {
             font-size: 2.65em;
             font-weight: 900;
@@ -357,7 +361,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            margin-bottom: 86px; /* More vertical gap between events */
+            margin-bottom: 86px;
             position: relative;
             text-align: left;
             min-height: 140px;
@@ -371,7 +375,7 @@
             align-items: flex-start;
         }
         .timeline-dot, .education-dot {
-            width: 76px; /* 100% bigger (was 38px) */
+            width: 76px;
             height: 76px;
             background: #fff;
             border: 7px solid var(--timeline-dot);
@@ -379,9 +383,15 @@
             box-shadow: 0 4px 20px #e1b16955;
             position: absolute;
             top: 30px;
-            right: -65px; /* Add much more space between dot and content */
+            right: -65px;
             z-index: 2;
             display: flex; align-items: center; justify-content: center;
+        }
+        .timeline-dot img, .education-dot img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            display: block;
         }
         .timeline-event.even .timeline-dot, .education-event.even .education-dot {
             left: -65px; right: auto;
@@ -389,7 +399,7 @@
         .timeline-content, .education-content {
             background: var(--timeline-card-bg);
             border-radius: 16px;
-            padding: 30px 38px 26px 32px; /* More padding */
+            padding: 30px 38px 26px 32px;
             box-shadow: 0 3px 14px #1b1b2e2c;
             margin-left: 0;
             min-width: 230px;
@@ -415,6 +425,22 @@
             color: #fff;
             margin-top: 2px;
             font-weight: 600;
+            margin-bottom: 15px;
+        }
+        /* EXPERIENCE/EDUCATION BULLETS (white, spaced) */
+        .timeline-content ul, .education-content ul {
+            color: #fff !important;
+            font-size: 1.04em;
+            margin-top: 7px;
+            margin-bottom: 0;
+            padding-left: 20px;
+            list-style: disc;
+        }
+        .timeline-content ul li, .education-content ul li {
+            margin-bottom: 0.7em;
+        }
+        .timeline-content ul li:last-child, .education-content ul li:last-child {
+            margin-bottom: 0.2em;
         }
         /* Responsive */
         @media (max-width: 1240px) {
@@ -481,31 +507,30 @@
                     <div class="social-row">
                         <a href="https://www.linkedin.com/in/aryankaushik/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                         <a href="https://github.com/aryankaushik89" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank" title="Kaggle (coming soon)"><i class="fab fa-kaggle"></i></a>
-                        <a href="mailto:aryan23.kaushik@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="#" id="emailIcon" title="Show Email"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Core Expertise Section -->
+        <!-- Core Expertise Section (PNG icons) -->
         <section class="core-section">
             <div class="section-title">Skills</div>
             <div class="core-cards-row">
                 <div class="core-card">
-                    <svg fill="none" viewBox="0 0 64 64"><rect x="14" y="14" width="36" height="36" rx="9" stroke="#e1b169" stroke-width="5"/><path d="M21 43L32 22l11 21" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+                    <img src="ml_icon.png" alt="Machine Learning"/>
                     <div class="core-label">Machine Learning</div>
                 </div>
                 <div class="core-card">
-                    <svg fill="none" viewBox="0 0 64 64"><rect x="10" y="19" width="44" height="26" rx="7" stroke="#e1b169" stroke-width="5"/><circle cx="32" cy="32" r="8" stroke="#fff" stroke-width="3"/></svg>
+                    <img src="data_analysis_icon.png" alt="Data Analysis"/>
                     <div class="core-label">Data Analysis</div>
                 </div>
                 <div class="core-card">
-                    <svg fill="none" viewBox="0 0 64 64"><rect x="16" y="16" width="32" height="32" rx="8" stroke="#e1b169" stroke-width="5"/><path d="M22 42L32 26l10 16" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+                    <img src="data_viz_icon.png" alt="Advanced Visualization"/>
                     <div class="core-label">Advanced Visualization</div>
                 </div>
                 <div class="core-card">
-                    <svg fill="none" viewBox="0 0 64 64"><rect x="13" y="13" width="38" height="38" rx="11" stroke="#e1b169" stroke-width="5"/><circle cx="32" cy="32" r="9" stroke="#fff" stroke-width="3"/><path d="M32 25v10l7 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
+                    <img src="stat_analysis_icon.png" alt="Statistical Analysis"/>
                     <div class="core-label">Statistical Analysis</div>
                 </div>
             </div>
@@ -542,7 +567,6 @@
                     <div class="tool-bubble"><img class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Looker"/></div>
                     <div class="tool-label">Looker</div>
                 </div>
-                <!-- Row 2 -->
                 <div class="tool-col">
                     <div class="tool-bubble"><img class="tool-icon" src="quicksight_logo.svg" alt="QuickSight"/></div>
                     <div class="tool-label">QuickSight</div>
@@ -636,12 +660,12 @@
                 <div class="timeline-line"></div>
                 <div class="timeline-event odd">
                     <div class="timeline-dot">
-                        <img src="deduce_logo.svg" alt="Deduce" style="width:44px;height:44px;">
+                        <img src="deduce_logo.svg" alt="Deduce">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Data Scientist, Deduce Inc. (acquired by CHEQ)</div>
                         <div class="timeline-years">2022–2024</div>
-                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                        <ul>
                             <li>Led or collaborated on all POV analyses, integrating proprietary and client data, engineering features, and applying ML models using Python and Spark to mitigate fraud risks and reduce friction.</li>
                             <li>Built Spark ML pipelines, developed fraud dashboards, performed advanced data QA, and delivered client-facing analytics and presentations.</li>
                         </ul>
@@ -649,12 +673,12 @@
                 </div>
                 <div class="timeline-event even">
                     <div class="timeline-dot">
-                        <img src="tophat.svg" alt="Top Hat" style="width:44px;height:44px;">
+                        <img src="tophat.svg" alt="Top Hat">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Sr. Data Analyst, Top Hat Monocle</div>
                         <div class="timeline-years">2021–2022</div>
-                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                        <ul>
                             <li>Delivered predictive models, automated reporting, and actionable insights to product and marketing. Queried AWS S3, Redshift, and built dashboards in Looker, QuickSight, and automated reports.</li>
                             <li>Supported growth analytics, marketing campaign performance, and product experiments.</li>
                         </ul>
@@ -662,12 +686,12 @@
                 </div>
                 <div class="timeline-event odd">
                     <div class="timeline-dot">
-                        <img src="initiative.svg" alt="Initiative" style="width:44px;height:44px;">
+                        <img src="initiative.svg" alt="Initiative">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Sr. Data Analyst, Initiative Inc.</div>
                         <div class="timeline-years">2019–2021</div>
-                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                        <ul>
                             <li>Insights on media performance, campaign optimization, and experimentation. Blended data from MS SQL, Azure, Google 360 Suite into live dashboards (Tableau, Data Studio, DOMO).</li>
                             <li>Designed advanced marketing analytics, built interactive Tableau dashboards, and automated data pulls.</li>
                         </ul>
@@ -675,12 +699,12 @@
                 </div>
                 <div class="timeline-event even">
                     <div class="timeline-dot">
-                        <img src="aeroplan-secondary-logo.svg" alt="Aimia" style="width:44px;height:44px;">
+                        <img src="aeroplan-secondary-logo.svg" alt="Aimia">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Sr. Data Analyst, Aimia (Aeroplan)</div>
                         <div class="timeline-years">2017–2018</div>
-                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                        <ul>
                             <li>Loyalty and CRM analytics, churn/lifetime value models, and Tableau automation. Led KPI reporting and segmentation for targeted marketing.</li>
                             <li>Built churn/CLV models, automated Tableau reporting, and performed customer segmentation for retention.</li>
                         </ul>
@@ -688,12 +712,12 @@
                 </div>
                 <div class="timeline-event odd">
                     <div class="timeline-dot">
-                        <img src="sears.svg" alt="Sears Canada" style="width:44px;height:44px;">
+                        <img src="sears.svg" alt="Sears Canada">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Data Analyst, Sears Canada</div>
                         <div class="timeline-years">2017</div>
-                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                        <ul>
                             <li>E-commerce analytics, recommendation engines, and performance dashboards for online retail.</li>
                             <li>Developed ML recommenders, built campaign dashboards, and live performance reporting.</li>
                         </ul>
@@ -701,12 +725,12 @@
                 </div>
                 <div class="timeline-event even">
                     <div class="timeline-dot">
-                        <img src="magna.svg" alt="Magna" style="width:44px;height:44px;">
+                        <img src="magna.svg" alt="Magna">
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-job">Expense Analyst, Magna International</div>
                         <div class="timeline-years">2014–2016</div>
-                        <ul style="margin: 12px 0 0 20px; padding: 0; color: #ffe191; font-size: 1.04em;">
+                        <ul>
                             <li>Analyzed operating expenses, reconciled accounts, and performed business trend analysis across 60+ divisions.</li>
                             <li>Automated reporting, performed financial forecasting and process optimization.</li>
                         </ul>
@@ -722,35 +746,43 @@
                 <div class="education-line"></div>
                 <div class="education-event odd">
                     <div class="education-dot">
-                        <img src="leeds.svg" alt="Leeds Logo" style="width:44px; height:44px;">
+                        <img src="leeds.svg" alt="Leeds Logo">
                     </div>
                     <div class="education-content">
                         <div class="education-degree">MSc. in Data Science and Analytics</div>
                         <div class="education-years">2018–2019</div>
                         <div class="education-institution">University of Leeds</div>
-                        Graduated with 4.0 GPA. Advanced coursework in ML, analytics, and predictive modeling.
+                        <ul>
+                            <li>Graduated with 4.0 GPA.</li>
+                            <li>Advanced coursework in ML, analytics, and predictive modeling.</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="education-event even">
                     <div class="education-dot">
-                        <img src="tmu_logo.svg" alt="TMU Logo" style="width:44px; height:44px;">
+                        <img src="tmu_logo.svg" alt="TMU Logo">
                     </div>
                     <div class="education-content">
                         <div class="education-degree">Graduate Certificate: Data Analytics, Big Data & Predictive Analytics</div>
                         <div class="education-years">2016–2017</div>
                         <div class="education-institution">Toronto Metropolitan University</div>
-                        Specialized in big data, data mining, and advanced analytics. GPA 4.0.
+                        <ul>
+                            <li>Specialized in big data, data mining, and advanced analytics.</li>
+                            <li>GPA 4.0.</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="education-event odd">
                     <div class="education-dot">
-                        <img src="mac_logo.svg" alt="McMaster Logo" style="width:44px; height:44px;">
+                        <img src="mac_logo.svg" alt="McMaster Logo">
                     </div>
                     <div class="education-content">
                         <div class="education-degree">Honours B.A. in Economics</div>
                         <div class="education-years">2008–2012</div>
                         <div class="education-institution">McMaster University</div>
-                        Focus in economics, data analysis, and statistics.
+                        <ul>
+                            <li>Focus in economics, data analysis, and statistics.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -762,7 +794,7 @@
             <span style="margin-left:22px; font-size:1em;"><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="color:var(--accent);text-decoration:none;">Back to Top</a></span>
         </div>
     </div>
-    <!-- JS: Nav highlight, timeline animation -->
+    <!-- JS: Nav highlight, timeline animation, email popup -->
     <script>
         const sections = ['overview','projects','work','education'];
         const navLinks = document.querySelectorAll('.nav-link');
@@ -790,6 +822,17 @@
         window.addEventListener('scroll', revealTimeline);
         window.addEventListener('DOMContentLoaded', () => {
             revealTimeline();
+        });
+
+        // Email popup
+        document.addEventListener('DOMContentLoaded', () => {
+            const emailIcon = document.getElementById('emailIcon');
+            if(emailIcon){
+                emailIcon.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('aryan23.kaushik@gmail.com');
+                });
+            }
         });
     </script>
 </body>

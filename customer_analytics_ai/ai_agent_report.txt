@@ -1,0 +1,6 @@
+Customer Segmentation & Anomaly Report
+
+- **Cluster 0:** 5095.0 users, avg monthly spend 41.73, churn rate 21.3%, revenue share 41.0%. → Strong revenue, but monitor churn closely.
+- **Cluster 1:** 7488.0 users, avg monthly spend 10.37, churn rate 33.3%, revenue share 15.0%. → High churn risk; target with onboarding or re-engagement.
+- **Cluster 2:** 2535.0 users, avg monthly spend 50.13, churn rate 18.8%, revenue share 24.5%. → Strong revenue, but monitor churn closely.
+- **Cluster 3:** 7882.0 users, avg monthly spend 12.90, churn rate 31.0%, revenue share 19.6%. → High churn risk; target with onboarding or re-engagement.

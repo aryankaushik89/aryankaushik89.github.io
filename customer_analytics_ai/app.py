@@ -74,9 +74,8 @@ st.markdown("""
 import os
 @st.cache_data
 def load_data():
-    st.write("Current working directory:", os.getcwd())
-    st.write("Files in current directory:", os.listdir("."))
-    return pd.read_csv("customer_analytics_ai/streamflow_customers.csv")
+    csv_path = os.path.join(os.path.dirname(__file__), "streamflow_customers.csv")
+    return pd.read_csv(csv_path)
 df = load_data()
 
 iso2_to_iso3 = {

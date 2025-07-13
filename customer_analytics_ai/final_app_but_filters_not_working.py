@@ -122,13 +122,13 @@ with tabs[0]:
     st.markdown("<div class='sub-explain'>• Track core SaaS customer health, engagement, loyalty and premium conversion.</div>", unsafe_allow_html=True)
     st.markdown("&nbsp;", unsafe_allow_html=True)
 
-    # --- KPI Cards (MUST use df_filt!) ---
+    # --- KPI Cards ---
     kpi_list = [
-        ("Users", f"{len(df_filt):,}"),
-        ("Churn Rate", f"{df_filt['churned'].mean()*100:.1f}%"),
-        ("Avg Loyalty", f"{int(df_filt['loyalty_points'].mean()):,}"),
-        ("Premium %", f"{df_filt['subscription_type'].eq('Premium').mean()*100:.1f}%"),
-        ("Countries", f"{df_filt['country'].nunique()}")
+        ("Users", f"{len(df):,}"),
+        ("Churn Rate", f"{df['churned'].mean()*100:.1f}%"),
+        ("Avg Loyalty", f"{int(df['loyalty_points'].mean()):,}"),
+        ("Premium %", f"{df['subscription_type'].eq('Premium').mean()*100:.1f}%"),
+        ("Countries", f"{df['country'].nunique()}")
     ]
     kpi_cards = st.columns(5)
     for col, (label, value) in zip(kpi_cards, kpi_list):
@@ -139,13 +139,13 @@ with tabs[0]:
 
     # ---- 4 MAIN VISUALS IN 2x2 GRID ----
     chart_cols = st.columns(2, gap="large")
-    # Churn Rate by Subscription Type (df_filt!)
+    # Churn Rate by Subscription Type
     with chart_cols[0]:
         st.markdown("<div class='big-heading'>Churn Rate by Subscription Type</div>", unsafe_allow_html=True)
         st.markdown("<div class='sub-explain'>• Churn decreases with each higher subscription tier; enterprise churn is lowest.</div>", unsafe_allow_html=True)
         sub_order = ['Free', 'Basic', 'Premium', 'Enterprise']
         custom_palette = ['#57b8ff', '#a259f7', '#f95d9b', '#ffc300']
-        churn_rate = df_filt.groupby('subscription_type')['churned'].mean().reindex(sub_order)
+        churn_rate = df.groupby('subscription_type')['churned'].mean().reindex(sub_order)
         fig1 = px.bar(
             churn_rate.reset_index(), x='subscription_type', y='churned',
             color='subscription_type', color_discrete_sequence=custom_palette,
@@ -162,7 +162,6 @@ with tabs[0]:
             paper_bgcolor='#18192c'
         )
         st.plotly_chart(fig1, use_container_width=True)
-        # Static summary on full data
         st.markdown(
             "<div class='overall-observation'><b>Overall Observation:</b><br>"
             "Churn is highest for Free users and decreases sharply with each higher tier.<br>"
@@ -171,11 +170,11 @@ with tabs[0]:
             unsafe_allow_html=True
         )
 
-    # Subscription Breakdown Pie (df_filt!)
+    # Subscription Breakdown Pie
     with chart_cols[1]:
         st.markdown("<div class='big-heading'>Subscription Breakdown</div>", unsafe_allow_html=True)
         st.markdown("<div class='sub-explain'>• What percent of users are Free, Basic, Premium, or Enterprise?</div>", unsafe_allow_html=True)
-        pie_data = df_filt['subscription_type'].value_counts().reindex(sub_order).reset_index()
+        pie_data = df['subscription_type'].value_counts().reindex(sub_order).reset_index()
         pie_data.columns = ['subscription_type', 'count']
         fig_pie = px.pie(
             pie_data, names='subscription_type', values='count',
@@ -194,12 +193,13 @@ with tabs[0]:
             unsafe_allow_html=True
         )
 
-    # 2nd row (two visuals, both df_filt!)
+    # 2nd row (two visuals)
     chart2_cols = st.columns(2, gap="large")
+    # Feature Correlation with Churn
     with chart2_cols[0]:
         st.markdown("<div class='big-heading'>Feature Correlation with Churn</div>", unsafe_allow_html=True)
         st.markdown("<div class='sub-explain'>• Which features are most predictive of churn? Top correlations shown.</div>", unsafe_allow_html=True)
-        num_df = df_filt.select_dtypes(include=['number'])
+        num_df = df.select_dtypes(include=['number'])
         if 'churned' in num_df.columns:
             corrs = num_df.corr(numeric_only=True)
             churn_corrs = corrs['churned'].sort_values(key=lambda x: abs(x), ascending=False)[1:9]
@@ -225,11 +225,12 @@ with tabs[0]:
         else:
             st.info("No churned column available for correlation.")
 
+    # Top Clusters by Spend (BG FIXED)
     with chart2_cols[1]:
         st.markdown("<div class='big-heading'>Top Clusters by Spend</div>", unsafe_allow_html=True)
         st.markdown("<div class='sub-explain'>• Clusters with highest avg monthly spend for targeting and upsell.</div>", unsafe_allow_html=True)
-        if 'cluster' in df_filt.columns and 'monthly_spend' in df_filt.columns:
-            cluster_spend = df_filt.groupby('cluster', observed=True)['monthly_spend'].mean().reset_index()
+        if 'cluster' in df.columns and 'monthly_spend' in df.columns:
+            cluster_spend = df.groupby('cluster', observed=True)['monthly_spend'].mean().reset_index()
             cluster_spend = cluster_spend.sort_values('monthly_spend', ascending=False)
             fig_bar = px.bar(
                 cluster_spend, x='cluster', y='monthly_spend', color='cluster',
@@ -260,8 +261,8 @@ with tabs[1]:
     with c1:
         st.markdown("<div class='big-heading'>Monthly Active Users (MAU)</div>", unsafe_allow_html=True)
         st.markdown("<div class='sub-explain'>• Trend of unique active users by signup month, with rolling mean.</div>", unsafe_allow_html=True)
-        if 'signup_date' in df_filt.columns:
-            mau = (df_filt.groupby(pd.to_datetime(df_filt['signup_date'], errors='coerce').dt.to_period('M'))
+        if 'signup_date' in df.columns:
+            mau = (df.groupby(pd.to_datetime(df['signup_date'], errors='coerce').dt.to_period('M'))
                    .agg({'customer_id':'nunique'})
                    .rename(columns={'customer_id':'MAU'}))
             mau = mau.reset_index()
@@ -294,7 +295,7 @@ with tabs[1]:
     with c2:
         st.markdown("<div class='big-heading'>Customer Geo Trends</div>", unsafe_allow_html=True)
         st.markdown("<div class='sub-explain'>• Customer distribution by country, sized by active users.</div>", unsafe_allow_html=True)
-        geo_df = df_filt.groupby(['country_iso3']).agg(customers=('customer_id','count')).reset_index()
+        geo_df = df.groupby(['country_iso3']).agg(customers=('customer_id','count')).reset_index()
         fig_geo = px.scatter_geo(
             geo_df, locations="country_iso3", size="customers",
             projection="natural earth", color="customers",
@@ -315,8 +316,8 @@ with tabs[1]:
     st.divider()
     st.markdown("<div class='big-heading'>Churn Rate by Customer Tenure</div>", unsafe_allow_html=True)
     st.markdown("<div class='sub-explain'>• Raw and smoothed churn rate by months as a customer (rolling mean).</div>", unsafe_allow_html=True)
-    if 'tenure_months' in df_filt.columns:
-        tenure_churn = df_filt.groupby('tenure_months').agg(
+    if 'tenure_months' in df.columns:
+        tenure_churn = df.groupby('tenure_months').agg(
             churn_rate=('churned','mean'),
             users=('customer_id','count')
         ).reset_index()
@@ -356,7 +357,7 @@ with tabs[2]:
     with col1:
         st.markdown("<div class='big-heading'>Loyalty by Cluster</div>", unsafe_allow_html=True)
         st.markdown("<div class='sub-explain'>• Average loyalty points by cluster (color: churn rate).</div>", unsafe_allow_html=True)
-        seg_loy = df_filt.groupby('cluster').agg(
+        seg_loy = df.groupby('cluster').agg(
             avg_loyalty=('loyalty_points','mean'),
             churn_rate=('churned','mean'),
             customers=('customer_id','count')
@@ -375,7 +376,7 @@ with tabs[2]:
     with col2:
         st.markdown("<div class='big-heading'>Loyalty vs Spend by Cluster</div>", unsafe_allow_html=True)
         st.markdown("<div class='sub-explain'>• Clusters by avg loyalty vs avg spend, bubble size = churn rate.</div>", unsafe_allow_html=True)
-        cluster_metrics = df_filt.groupby('cluster').agg(
+        cluster_metrics = df.groupby('cluster').agg(
             avg_loyalty=('loyalty_points','mean'),
             avg_spend=('monthly_spend','mean'),
             churn_rate=('churned','mean')
@@ -403,7 +404,7 @@ with tabs[2]:
     st.divider()
     st.markdown("<div class='big-heading'>Churn/Loyalty Table by Segment</div>", unsafe_allow_html=True)
     st.markdown("<div class='sub-explain'>• Detailed segment table (cluster x subscription type): customers, churn, loyalty, spend.</div>", unsafe_allow_html=True)
-    seg_tab = df_filt.groupby(['cluster','subscription_type']).agg(
+    seg_tab = df.groupby(['cluster','subscription_type']).agg(
         customers=('customer_id','count'),
         churn_rate=('churned','mean'),
         loyalty=('loyalty_points','mean'),

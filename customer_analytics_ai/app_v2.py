@@ -7,7 +7,7 @@ from streamlit_dynamic_filters import DynamicFilters
 
 # --- PAGE SETUP ---
 st.set_page_config(
-    page_title="Customer Engagement & Churn Insights Dashboard",
+    page_title="Customer 360 Analytics & AI Dashboard",
     page_icon=":bar_chart:",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -26,23 +26,24 @@ st.markdown("""
         margin-bottom: 18px;
         text-align: center;
     }
-    .kpi-label { font-size: 1.17em; font-weight: 700; color: #cfd3e7; margin-bottom: 7px; }
-    .kpi-value { font-size: 2.6em; font-weight: 900; color: #fff; margin-bottom: 4px; letter-spacing: -1px; }
+    .kpi-label { font-size: 1.25em; font-weight: 700; color: #cfd3e7; margin-bottom: 7px; }
+    .kpi-value { font-size: 2.9em; font-weight: 900; color: #fff; margin-bottom: 4px; letter-spacing: -1px; }
     .main-header {
-        font-size: 3.1em !important;
+        font-size: 4.2em !important;
         font-weight: 900;
         color: #fff;
         margin-bottom: 0.18em;
         margin-left: 2px;
     }
     .sub-header {
-        font-size: 1.05em;
+        font-size: 1.08em;
         color: #b5badf;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         margin-left: 2px;
     }
+    .demo-note { display: none; }
     div[data-testid="stTabs"] > div {
-        font-size: 2.1em !important;
+        font-size: 2.2em !important;
         font-weight: 800 !important;
         color: #d7d7f7 !important;
         background: #18192c !important;
@@ -55,18 +56,8 @@ st.markdown("""
         border-bottom: 6px solid #4290fa !important;
         border-radius: 14px 14px 0 0 !important;
     }
-    .big-heading { font-size: 1.55em !important; font-weight: 800; color: #fafbff; margin-bottom: 4px; }
-    .sub-explain { font-size: 1.07em; color: #b7bedf; margin-bottom: 13px; margin-top: -8px;}
-    .overall-observation {
-        background: #23243a;
-        color: #d6e0ff;
-        border-radius: 9px;
-        font-size: 1.04em;
-        margin-top: 0.6em;
-        margin-bottom: 1.0em;
-        padding: 10px 18px 10px 16px;
-        border-left: 4px solid #4290fa;
-    }
+    .big-heading { font-size: 2.4em !important; font-weight: 800; color: #fafbff; margin-bottom: 4px; }
+    .sub-explain { font-size: 1.12em; color: #b7bedf; margin-bottom: 16px; margin-top: -10px;}
     </style>
 """, unsafe_allow_html=True)
 
@@ -95,25 +86,19 @@ with st.sidebar:
     filter_fields = ['subscription_type', 'cluster', 'month_period']
     filters = DynamicFilters(df, filters=filter_fields)
     filters.display_filters()
-    st.markdown("""
-        <div style='font-size:12px;color:#b3b6ce;margin-top:10px;'>
-        Showing demo data. Upload your own CSV to customize all tables.<br>
-        <b>Applying filters will dynamically change the final insights on the AI insights tab.</b><br>
-        <b>The observations under the individual visualizations are static; based on the full data without filters.</b>
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown("<div style='font-size:12px;color:#b3b6ce;margin-top:10px;'>Showing demo data. Upload your own CSV to customize all tables.</div>", unsafe_allow_html=True)
     st.divider()
 
 df_filt = filters.filter_df()
 
-# --- HEADER (NEW TITLE, ADJUSTED SPACING) ---
-st.markdown("<div class='main-header'>Customer Engagement & Churn Insights Dashboard</div>", unsafe_allow_html=True)
+# --- HEADER (NO CARD, LEFT-ALIGNED, BIGGER) ---
+st.markdown("<div class='main-header'>Customer 360 Analytics & AI Insights</div>", unsafe_allow_html=True)
 st.markdown("<div class='sub-header'>Upload your customer data to analyze engagement, loyalty, churn, segments, and get instant AI-driven business recommendations.<br>Or just explore with our rich demo dataset.</div>", unsafe_allow_html=True)
-st.markdown("&nbsp;", unsafe_allow_html=True)
+st.markdown("&nbsp;", unsafe_allow_html=True)  # Add vertical space after sub-header
 
-# --- TABS ---
+# --- TABS (LARGER, MODERN STYLE) ---
 tabs = st.tabs([
-    "Overview & Metrics", "Visual Trends & Map", "Segmentation & Clusters", "AI Insights & Export", "About"
+    "Overview & Metrics", "Visual Trends & Map", "Segmentation & Clusters", "AI Insights & Export"
 ])
 
 # ============ TAB 1: Overview & Metrics =============
@@ -122,7 +107,7 @@ with tabs[0]:
     st.markdown("<div class='sub-explain'>• Track core SaaS customer health, engagement, loyalty and premium conversion.</div>", unsafe_allow_html=True)
     st.markdown("&nbsp;", unsafe_allow_html=True)
 
-    # --- KPI Cards (MUST use df_filt!) ---
+    # --- KPI Cards (horizontal row, always) ---
     kpi_list = [
         ("Users", f"{len(df_filt):,}"),
         ("Churn Rate", f"{df_filt['churned'].mean()*100:.1f}%"),
@@ -139,10 +124,10 @@ with tabs[0]:
 
     # ---- 4 MAIN VISUALS IN 2x2 GRID ----
     chart_cols = st.columns(2, gap="large")
-    # Churn Rate by Subscription Type (df_filt!)
+    # Churn Rate by Subscription Type (NEW, replaces world map)
     with chart_cols[0]:
         st.markdown("<div class='big-heading'>Churn Rate by Subscription Type</div>", unsafe_allow_html=True)
-        st.markdown("<div class='sub-explain'>• Churn decreases with each higher subscription tier; enterprise churn is lowest.</div>", unsafe_allow_html=True)
+        st.markdown("<div class='sub-explain'>• Churn sharply decreases with each higher subscription tier; enterprise churn is extremely low.</div>", unsafe_allow_html=True)
         sub_order = ['Free', 'Basic', 'Premium', 'Enterprise']
         custom_palette = ['#57b8ff', '#a259f7', '#f95d9b', '#ffc300']
         churn_rate = df_filt.groupby('subscription_type')['churned'].mean().reindex(sub_order)
@@ -157,24 +142,15 @@ with tabs[0]:
             yaxis_title="Churn Rate",
             showlegend=False,
             yaxis_tickformat=".0%",
-            margin=dict(l=10, r=10, t=30, b=10),
-            plot_bgcolor='#18192c',
-            paper_bgcolor='#18192c'
+            margin=dict(l=10, r=10, t=30, b=10)
         )
         st.plotly_chart(fig1, use_container_width=True)
-        # Static summary on full data
-        st.markdown(
-            "<div class='overall-observation'><b>Overall Observation:</b><br>"
-            "Churn is highest for Free users and decreases sharply with each higher tier.<br>"
-            "• Focus on converting free users to paid plans.<br>"
-            "• Enterprise churn is extremely low—invest further in enterprise relationships.</div>",
-            unsafe_allow_html=True
-        )
+        st.markdown("**Observation:**\n- **Churn is highest for Free users** and decreases sharply with each higher tier.\n  - Focus on converting free users to paid plans.\n- **Enterprise churn is extremely low**—retention is strongest for our most valuable accounts.\n  - Invest further in enterprise relationships.", unsafe_allow_html=False)
 
-    # Subscription Breakdown Pie (df_filt!)
+    # Subscription Pie
     with chart_cols[1]:
         st.markdown("<div class='big-heading'>Subscription Breakdown</div>", unsafe_allow_html=True)
-        st.markdown("<div class='sub-explain'>• What percent of users are Free, Basic, Premium, or Enterprise?</div>", unsafe_allow_html=True)
+        st.markdown("<div class='sub-explain'>• See what percent of users are Free, Basic, Premium, or Enterprise.</div>", unsafe_allow_html=True)
         pie_data = df_filt['subscription_type'].value_counts().reindex(sub_order).reset_index()
         pie_data.columns = ['subscription_type', 'count']
         fig_pie = px.pie(
@@ -183,19 +159,12 @@ with tabs[0]:
             color_discrete_sequence=custom_palette
         )
         fig_pie.update_traces(textinfo='percent+label')
-        fig_pie.update_layout(margin=dict(l=0, r=0, t=0, b=0),
-                             plot_bgcolor='#18192c', paper_bgcolor='#18192c')
+        fig_pie.update_layout(margin=dict(l=0, r=0, t=0, b=0))
         st.plotly_chart(fig_pie, use_container_width=True)
-        st.markdown(
-            "<div class='overall-observation'><b>Overall Observation:</b><br>"
-            "Basic is the largest group, but Premium/Enterprise drive revenue.<br>"
-            "• Consider nudging Basic users with premium offers.<br>"
-            "• Retention of premium/enterprise users is key for revenue stability.</div>",
-            unsafe_allow_html=True
-        )
 
-    # 2nd row (two visuals, both df_filt!)
+    # 2nd row (two visuals)
     chart2_cols = st.columns(2, gap="large")
+    # Feature Correlation with Churn (NEW)
     with chart2_cols[0]:
         st.markdown("<div class='big-heading'>Feature Correlation with Churn</div>", unsafe_allow_html=True)
         st.markdown("<div class='sub-explain'>• Which features are most predictive of churn? Top correlations shown.</div>", unsafe_allow_html=True)
@@ -211,52 +180,38 @@ with tabs[0]:
                 xaxis_title="Feature",
                 yaxis_title="Correlation with Churn",
                 margin=dict(l=10, r=10, t=30, b=10),
-                coloraxis_showscale=False,
-                plot_bgcolor='#18192c', paper_bgcolor='#18192c'
+                coloraxis_showscale=False
             )
             st.plotly_chart(fig4, use_container_width=True)
-            st.markdown(
-                "<div class='overall-observation'><b>Overall Observation:</b><br>"
-                "Low engagement score, high support tickets, low loyalty, and missed payments are top churn predictors.<br>"
-                "• Targeted retention and outreach on these risk factors can reduce churn.<br>"
-                "• Build automated churn alerts for high-risk segments.</div>",
-                unsafe_allow_html=True
-            )
+            st.markdown("**Actionable Insights:**\n- **Low engagement score, high support tickets, low loyalty, and missed payments** are the most predictive of churn.\n  - Retention campaigns for these users can reduce churn dramatically.\n- **Targeted outreach for risk factors** can improve LTV.\n  - Build automated alerts for these risk features.", unsafe_allow_html=False)
         else:
             st.info("No churned column available for correlation.")
 
+    # Bar: Top Clusters by Spend
     with chart2_cols[1]:
         st.markdown("<div class='big-heading'>Top Clusters by Spend</div>", unsafe_allow_html=True)
-        st.markdown("<div class='sub-explain'>• Clusters with highest avg monthly spend for targeting and upsell.</div>", unsafe_allow_html=True)
+        st.markdown("<div class='sub-explain'>• Identify clusters with highest average monthly spend for targeting.</div>", unsafe_allow_html=True)
         if 'cluster' in df_filt.columns and 'monthly_spend' in df_filt.columns:
             cluster_spend = df_filt.groupby('cluster', observed=True)['monthly_spend'].mean().reset_index()
             cluster_spend = cluster_spend.sort_values('monthly_spend', ascending=False)
             fig_bar = px.bar(
                 cluster_spend, x='cluster', y='monthly_spend', color='cluster',
-                color_continuous_scale=px.colors.sequential.Blues,
-                labels={'monthly_spend': 'Avg Spend'}
+                color_continuous_scale="blues"
             )
-            fig_bar.update_layout(
-                margin=dict(l=10, r=10, t=30, b=10),
-                showlegend=False,
+            fig_bar.update_layout(margin=dict(l=10, r=10, t=30, b=10), showlegend=False,
                 xaxis=dict(title='Cluster', tickmode='array', tickvals=cluster_spend['cluster']),
                 yaxis=dict(title='Avg. Spend'),
-                plot_bgcolor='#18192c', paper_bgcolor='#18192c'
+                plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)'
             )
             st.plotly_chart(fig_bar, use_container_width=True)
-            st.markdown(
-                "<div class='overall-observation'><b>Overall Observation:</b><br>"
-                "Cluster 2 has the highest spend—likely our most valuable users.<br>"
-                "• Upsell and retention for high spend clusters.<br>"
-                "• Review pricing/tiering for lower spend clusters.</div>",
-                unsafe_allow_html=True
-            )
         else:
             st.info("No cluster or spend data available.")
 
 # ============ TAB 2: Visual Trends & Map =============
 with tabs[1]:
-    c1, c2 = st.columns([1.3,1], gap="large")
+    st.markdown("<div class='big-heading'>Visual Trends & World Map</div>", unsafe_allow_html=True)
+    st.markdown("<div class='sub-explain'>• See monthly active user (MAU) trends and churn rate by tenure, globally.</div>", unsafe_allow_html=True)
+    c1, c2 = st.columns([1,2], gap="large")
     with c1:
         st.markdown("<div class='big-heading'>Monthly Active Users (MAU)</div>", unsafe_allow_html=True)
         st.markdown("<div class='sub-explain'>• Trend of unique active users by signup month, with rolling mean.</div>", unsafe_allow_html=True)
@@ -278,17 +233,10 @@ with tabs[1]:
             ))
             fig_mau.update_layout(
                 title="",
-                plot_bgcolor='#18192c', paper_bgcolor='#18192c',
+                plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                 legend=dict(font=dict(size=15))
             )
             st.plotly_chart(fig_mau, use_container_width=True)
-            st.markdown(
-                "<div class='overall-observation'><b>Overall Observation:</b><br>"
-                "Active user growth is consistent, with seasonal dips.<br>"
-                "• Growth initiatives during slow periods can smooth usage.<br>"
-                "• Review churn patterns in declining months for improvement.</div>",
-                unsafe_allow_html=True
-            )
         else:
             st.info("No signup_date column for MAU chart.")
     with c2:
@@ -300,17 +248,9 @@ with tabs[1]:
             projection="natural earth", color="customers",
             color_continuous_scale="Purples"
         )
-        fig_geo.update_geos(showland=True, landcolor="#18192c", bgcolor='#18192c')
-        fig_geo.update_layout(margin=dict(l=0, r=0, t=0, b=0),
-                             plot_bgcolor='#18192c', paper_bgcolor='#18192c')
+        fig_geo.update_geos(showland=True, landcolor="#18192c", bgcolor='rgba(0,0,0,0)')
+        fig_geo.update_layout(margin=dict(l=0, r=0, t=0, b=0))
         st.plotly_chart(fig_geo, use_container_width=True)
-        st.markdown(
-            "<div class='overall-observation'><b>Overall Observation:</b><br>"
-            "Highest customer counts in US/India—growth regions.<br>"
-            "• Localize product for key geos.<br>"
-            "• Develop acquisition campaigns in under-penetrated countries.</div>",
-            unsafe_allow_html=True
-        )
 
     st.divider()
     st.markdown("<div class='big-heading'>Churn Rate by Customer Tenure</div>", unsafe_allow_html=True)
@@ -336,69 +276,49 @@ with tabs[1]:
             title="",
             xaxis_title="Tenure (Months)", yaxis_title="Churn Rate",
             font=dict(size=16), margin=dict(l=20, r=20, t=60, b=60),
-            plot_bgcolor='#18192c', paper_bgcolor='#18192c',
+            plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
             legend=dict(font=dict(size=15)), yaxis_tickformat=".0%"
         )
         st.plotly_chart(fig_tc, use_container_width=True)
-        st.markdown(
-            "<div class='overall-observation'><b>Overall Observation:</b><br>"
-            "Churn is highest for new customers, falling rapidly as tenure increases.<br>"
-            "• Onboard/retain new users in first 6–12 months.<br>"
-            "• Develop loyalty programs for long-term users.</div>",
-            unsafe_allow_html=True
-        )
     else:
         st.info("No tenure_months data available.")
 
 # ============ TAB 3: Segmentation & Clusters =============
 with tabs[2]:
+    st.markdown("<div class='big-heading'>Customer Segmentation & Clusters</div>", unsafe_allow_html=True)
+    st.markdown("<div class='sub-explain'>• Drill into clusters by loyalty, churn, and spend for micro-segmentation.</div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.markdown("<div class='big-heading'>Loyalty by Cluster</div>", unsafe_allow_html=True)
-        st.markdown("<div class='sub-explain'>• Average loyalty points by cluster (color: churn rate).</div>", unsafe_allow_html=True)
+        st.markdown("<div class='sub-explain'>• Compares average loyalty points by cluster (color: churn rate).</div>", unsafe_allow_html=True)
         seg_loy = df_filt.groupby('cluster').agg(
             avg_loyalty=('loyalty_points','mean'),
             churn_rate=('churned','mean'),
             customers=('customer_id','count')
         ).reset_index()
         fig_loy = px.bar(seg_loy, x='cluster', y='avg_loyalty', color='churn_rate', color_continuous_scale="RdPu",
-                         title="", labels={'avg_loyalty':'Avg Loyalty'})
-        fig_loy.update_layout(plot_bgcolor='#18192c', paper_bgcolor='#18192c')
+                         title="")
         st.plotly_chart(fig_loy, use_container_width=True)
-        st.markdown(
-            "<div class='overall-observation'><b>Overall Observation:</b><br>"
-            "Cluster 0 and 2 have highest loyalty scores; cluster 1 has lowest.<br>"
-            "• Target lower-loyalty clusters for improvement.<br>"
-            "• Analyze drivers of loyalty in top clusters.</div>",
-            unsafe_allow_html=True
-        )
     with col2:
         st.markdown("<div class='big-heading'>Loyalty vs Spend by Cluster</div>", unsafe_allow_html=True)
-        st.markdown("<div class='sub-explain'>• Clusters by avg loyalty vs avg spend, bubble size = churn rate.</div>", unsafe_allow_html=True)
-        cluster_metrics = df_filt.groupby('cluster').agg(
-            avg_loyalty=('loyalty_points','mean'),
-            avg_spend=('monthly_spend','mean'),
-            churn_rate=('churned','mean')
-        ).reset_index()
-        cluster_colors = ['#f95d9b99', '#a259f799', '#ffc30099', '#1c5fb899']  # pink, purple, yellow, blue
-        fig_scatter = px.scatter(
-            cluster_metrics, x='avg_loyalty', y='avg_spend',
-            size='churn_rate', color='cluster', color_discrete_sequence=cluster_colors,
-            labels={'avg_loyalty': 'Avg Loyalty', 'avg_spend': 'Avg Spend'}
-        )
-        fig_scatter.update_traces(marker=dict(opacity=0.8, line=dict(width=1, color="#18192c")))
-        fig_scatter.update_layout(
-            legend_title="Cluster",
-            plot_bgcolor='#18192c', paper_bgcolor='#18192c'
-        )
-        st.plotly_chart(fig_scatter, use_container_width=True)
-        st.markdown(
-            "<div class='overall-observation'><b>Overall Observation:</b><br>"
-            "Clusters with high loyalty also tend to have higher spend.<br>"
-            "• Use loyalty programs to drive spend.<br>"
-            "• Cross-analyze churn rates among spenders.</div>",
-            unsafe_allow_html=True
-        )
+        st.markdown("<div class='sub-explain'>• Clusters plotted by avg loyalty vs avg spend, bubble size = churn rate.</div>", unsafe_allow_html=True)
+        if 'monthly_spend' in df_filt.columns:
+            cluster_metrics = df_filt.groupby('cluster').agg(
+                avg_loyalty=('loyalty_points','mean'),
+                avg_spend=('monthly_spend','mean'),
+                churn_rate=('churned','mean')
+            ).reset_index()
+            fig_scatter = px.scatter(
+                cluster_metrics, x='avg_loyalty', y='avg_spend',
+                size='churn_rate', color='cluster', hover_name='cluster',
+                title="", labels={
+                    'avg_loyalty': 'Avg Loyalty',
+                    'avg_spend': 'Avg Spend'
+                }
+            )
+            st.plotly_chart(fig_scatter, use_container_width=True)
+        else:
+            st.info("No spend data for clusters available.")
 
     st.divider()
     st.markdown("<div class='big-heading'>Churn/Loyalty Table by Segment</div>", unsafe_allow_html=True)
@@ -410,18 +330,13 @@ with tabs[2]:
         spend=('monthly_spend','mean')
     ).reset_index()
     st.dataframe(seg_tab, use_container_width=True)
-    st.markdown(
-        "<div class='overall-observation'><b>Overall Observation:</b><br>"
-        "Enterprise Premium cluster shows lowest churn; Free/Basic clusters are at highest risk.<br>"
-        "• Prioritize retention for at-risk segments.<br>"
-        "• Incentivize upgrades for Free/Basic cluster users.</div>",
-        unsafe_allow_html=True
-    )
 
 # ============ TAB 4: AI Insights & Export =============
 with tabs[3]:
     st.markdown("<div class='big-heading'>AI Insights & Export</div>", unsafe_allow_html=True)
     st.markdown("<div class='sub-explain'>• Download filtered tables, and review actionable AI-driven insights and risk segments below.</div>", unsafe_allow_html=True)
+
+    # More robust insights, markdown with sub-bullets
     st.markdown("##### 🔍 Quick Wins / Risks")
     st.markdown(
         """
@@ -443,6 +358,7 @@ with tabs[3]:
   - Double-down on growth drivers, promote case studies.
         """
     )
+
     st.divider()
     st.markdown("<div class='big-heading'>Download All Tables</div>", unsafe_allow_html=True)
     st.markdown("<div class='sub-explain'>• All exports are filtered to current dashboard selections.</div>", unsafe_allow_html=True)
@@ -452,40 +368,15 @@ with tabs[3]:
         href = f'<a href="data:file/csv;base64,{b64}" download="{name}.csv"><button style="padding:4px 18px; border-radius:8px; background:#423fa1; color:#fff; border:0; margin-right:7px;">{description}</button></a>'
         st.markdown(href, unsafe_allow_html=True)
 
+    # CLEAR IN-TEXT EXPLANATIONS
     export_csv_button(df_filt, "filtered_data_all", "Download All Filtered Customer Data (CSV)")
     export_csv_button(seg_tab, "segment_churn_loyalty", "Download Segment Churn & Loyalty Table (CSV)")
     export_csv_button(cluster_metrics, "cluster_metrics", "Download Cluster Summary Metrics (CSV)")
-
-# ============ TAB 5: About ============
-with tabs[4]:
-    st.markdown("<div class='big-heading'>About this Dashboard</div>", unsafe_allow_html=True)
-    st.markdown("""
-**How was this demo built?**  
-This dashboard analyzes synthetic customer data generated in the notebook `customer_churn_project.ipynb` using custom scripts and realistic logic for SaaS customer lifecycle simulation.  
-The dashboard is fully interactive, and powered by Streamlit.
-
-**How does it work?**  
-- The dashboard uses a synthetic dataset with fields: customer_id, country, cluster, monthly_spend, subscription_type, loyalty_points, churned, signup_date, churn_date, tenure_months, and others.
-- All charts, insights, and recommendations are dynamically updated based on the filters you select in the sidebar.
-- Observations under each visual are static and based on the full dataset (not filtered).
-
-**How can you use it with your own data?**  
-- To use this dashboard, upload a CSV file with similar columns (see above).
-- Required fields: customer_id, subscription_type, cluster, churned, signup_date, monthly_spend, loyalty_points.
-- For best results, include country, tenure_months, and as many engagement/usage fields as possible.
-- The code and documentation are available here:  
-  [Customer 360 Analytics & AI Dashboard (GitHub)](https://github.com/aryankaushik89/aryankaushik89.github.io/tree/main/customer_analytics_ai)
-- To adapt, just update your data to match the expected field names and formats.
-
-**Project credit:**  
-Dashboard and data science automation by Aryan Kaushik.  
-Analysis and dashboard built for demo, portfolio, and educational use.
-    """)
 
 # --- FOOTER ---
 st.markdown("""
     <hr style="margin-top:38px; margin-bottom:3px;">
     <center>
-    <span style='color:#6d729e;'>Automated Insights Dashboard - Aryan Kaushik - <a href="https://github.com/aryankaushik89/aryankaushik89.github.io/tree/main/customer_analytics_ai" style='color:#b8baff;'>GitHub</a></span>
+    <span style='color:#6d729e;'>Data Science Portfolio Demo | Inspired by <a href="https://streamlit.io/gallery" style='color:#b8baff;'>Streamlit Gallery</a></span>
     </center>
 """, unsafe_allow_html=True)

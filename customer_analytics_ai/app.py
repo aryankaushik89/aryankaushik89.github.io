@@ -71,8 +71,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- LOAD DATA ---
+import os
 @st.cache_data
 def load_data():
+    st.write("Current working directory:", os.getcwd())
+    st.write("Files in current directory:", os.listdir("."))
     return pd.read_csv("streamflow_customers.csv")
 df = load_data()
 

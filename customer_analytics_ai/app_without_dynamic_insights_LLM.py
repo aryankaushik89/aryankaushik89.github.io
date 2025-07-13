@@ -1,21 +1,10 @@
-import dotenv
-import os
-
-dotenv.load_dotenv()  # Loads variables from .env file
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import base64
 from streamlit_dynamic_filters import DynamicFilters
-
-try:
-    import openai
-except ImportError:
-    openai = None
+import os
 
 # --- PAGE SETUP ---
 st.set_page_config(
@@ -101,7 +90,7 @@ df['month_period'] = pd.to_datetime(df['signup_date'], errors='coerce').dt.to_pe
 with st.sidebar:
     logo_path = os.path.join(os.path.dirname(__file__), "streamflow_logo.png")
     st.image(logo_path, width=330)
-    st.markdown("<h4 style='color:#f4f6fc; margin-bottom:1px;'>Customer 360 Analytics & Dynamic Insights</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color:#f4f6fc; margin-bottom:1px;'>Customer 360 Analytics & AI</h4>", unsafe_allow_html=True)
     st.markdown("SaaS Customer Segmentation & Insights", unsafe_allow_html=True)
     st.divider()
     upload = st.file_uploader("Upload CSV (200MB max)", type="csv")
@@ -112,7 +101,7 @@ with st.sidebar:
     st.markdown("""
         <div style='font-size:12px;color:#b3b6ce;margin-top:10px;'>
         Showing demo data. Upload your own CSV to customize all tables.<br>
-        <b>Applying filters will dynamically change the final insights on the Dynamic Insights tab.</b><br>
+        <b>Applying filters will dynamically change the final insights on the AI insights tab.</b><br>
         <b>The observations under the individual visualizations are static; based on the full data without filters.</b>
         </div>
         """, unsafe_allow_html=True)
@@ -122,13 +111,12 @@ df_filt = filters.filter_df()
 
 # --- HEADER (NEW TITLE, ADJUSTED SPACING) ---
 st.markdown("<div class='main-header'>Customer Engagement & Churn Insights Dashboard</div>", unsafe_allow_html=True)
-st.markdown("<div class='sub-header'>Upload your customer data to analyze engagement, loyalty, churn, segments, and get instant dynamic business recommendations.<br>Or just explore with our rich demo dataset.</div>", unsafe_allow_html=True)
+st.markdown("<div class='sub-header'>Upload your customer data to analyze engagement, loyalty, churn, segments, and get instant AI-driven business recommendations.<br>Or just explore with our rich demo dataset.</div>", unsafe_allow_html=True)
 st.markdown("&nbsp;", unsafe_allow_html=True)
 
 # --- TABS ---
 tabs = st.tabs([
-    "Overview & Metrics", "Visual Trends & Map", "Segmentation & Clusters", 
-    "Dynamic Insights & Export", "About", "Connect LLM"
+    "Overview & Metrics", "Visual Trends & Map", "Segmentation & Clusters", "AI Insights & Export", "About"
 ])
 
 # ============ TAB 1: Overview & Metrics =============
@@ -177,6 +165,7 @@ with tabs[0]:
             paper_bgcolor='#18192c'
         )
         st.plotly_chart(fig1, use_container_width=True)
+        # Static summary on full data
         st.markdown(
             "<div class='overall-observation'><b>Overall Observation:</b><br>"
             "Churn is highest for Free users and decreases sharply with each higher tier.<br>"
@@ -394,7 +383,7 @@ with tabs[2]:
             avg_spend=('monthly_spend','mean'),
             churn_rate=('churned','mean')
         ).reset_index()
-        cluster_colors = ['#f95d9b99', '#a259f799', '#ffc30099', '#1c5fb899']
+        cluster_colors = ['#f95d9b99', '#a259f799', '#ffc30099', '#1c5fb899']  # pink, purple, yellow, blue
         fig_scatter = px.scatter(
             cluster_metrics, x='avg_loyalty', y='avg_spend',
             size='churn_rate', color='cluster', color_discrete_sequence=cluster_colors,
@@ -432,103 +421,43 @@ with tabs[2]:
         unsafe_allow_html=True
     )
 
-# ============ TAB 4: Dynamic Insights & Export =============
+# ============ TAB 4: AI Insights & Export =============
 with tabs[3]:
-    st.markdown("<div class='big-heading'>Dynamic Insights & Export</div>", unsafe_allow_html=True)
-    st.markdown("<div class='sub-explain'>• Download filtered tables, and review actionable data-driven insights and risk segments below.</div>", unsafe_allow_html=True)
-    st.markdown("##### 🔍 Dynamic Insights for Current Data")
-
-    # --- Local Rule-Based Insights Engine ---
-    def dynamic_insights(df):
-        out = []
-        if 'cluster' in df and 'churned' in df:
-            churn = df.groupby('cluster')['churned'].mean().sort_values(ascending=False)
-            out.append(f"**Clusters with highest churn:** {', '.join(str(c) for c in churn.head(2).index.tolist())} ({', '.join(f'{c}: {v:.1%}' for c,v in churn.head(2).items())})")
-        if 'loyalty_points' in df and 'cluster' in df:
-            loyalty = df.groupby('cluster')['loyalty_points'].mean().sort_values(ascending=False)
-            best = loyalty.idxmax()
-            out.append(f"**Most loyal cluster:** {best} (avg loyalty {loyalty.max():.0f})")
-        if 'monthly_spend' in df and 'cluster' in df:
-            spend = df.groupby('cluster')['monthly_spend'].mean().sort_values(ascending=False)
-            out.append(f"**Highest spend cluster:** {spend.idxmax()} (avg spend ${spend.max():.0f})")
-        if 'loyalty_points' in df:
-            low_loy = df['loyalty_points'].mean()
-            if low_loy < 250:
-                out.append("**Potential churn risk:** Loyalty below 250. Proactive engagement recommended.")
-        if 'churned' in df and 'cluster' in df:
-            high_churn = df.groupby('cluster')['churned'].mean()
-            risky = high_churn[high_churn > 0.3].index.tolist()
-            if risky:
-                out.append(f"**Consider retention campaign for clusters:** {', '.join(str(r) for r in risky)} (churn > 30%)")
-        if 'subscription_type' in df:
-            subs = df['subscription_type'].value_counts(normalize=True)
-            if "Enterprise" in subs and "Premium" in subs:
-                out.append("**Explore pricing for Enterprise vs Premium segment.** Test price sensitivity for more conversions.")
-        if 'cluster' in df:
-            grow = df['cluster'].value_counts().idxmax()
-            out.append(f"**Cluster with most users:** {grow}. Double-down on what works for this segment.")
-        # Add more as you like!
-        return out if out else ["No insights available for current filter."]
-
-    insights = dynamic_insights(df_filt)
-    for insight in insights:
-        st.markdown(f"- {insight}")
-
+    st.markdown("<div class='big-heading'>AI Insights & Export</div>", unsafe_allow_html=True)
+    st.markdown("<div class='sub-explain'>• Download filtered tables, and review actionable AI-driven insights and risk segments below.</div>", unsafe_allow_html=True)
+    st.markdown("##### 🔍 Quick Wins / Risks")
+    st.markdown(
+        """
+- **Churn highest in clusters:** 1, 3  
+  - Focus on churn drivers in these segments with tailored retention offers.
+- **Most loyal cluster:** Cluster 0 (avg loyalty 364)  
+  - Analyze what makes this cluster stick—replicate best practices.
+- **Most revenue:** Cluster 2 (avg spend $50)  
+  - Upsell or cross-sell into this cluster to maximize revenue further.
+- **Potential churn risk if loyalty below 250.**  
+  - Launch proactive engagement for users near this threshold.
+- **Consider retention campaign for clusters with churn > 30%.**  
+  - Target with value reinforcement and incentives.
+- **Explore pricing for Enterprise vs Premium segment.**  
+  - Test price sensitivity; could unlock more enterprise conversions.
+- **At-risk clusters:** 1, 3  
+  - Further profile at-risk segments for targeted outreach.
+- **Clusters with highest growth:** 2  
+  - Double-down on growth drivers, promote case studies.
+        """
+    )
     st.divider()
     st.markdown("<div class='big-heading'>Download All Tables</div>", unsafe_allow_html=True)
     st.markdown("<div class='sub-explain'>• All exports are filtered to current dashboard selections.</div>", unsafe_allow_html=True)
     def export_csv_button(df, name, description):
         csv = df.to_csv(index=False).encode('utf-8')
         b64 = base64.b64encode(csv).decode()
-        href = f'<a href="data:file/csv;base64,{b64}" download="{name}.csv"><button style=\"padding:4px 18px; border-radius:8px; background:#423fa1; color:#fff; border:0; margin-right:7px;\">{description}</button></a>'
+        href = f'<a href="data:file/csv;base64,{b64}" download="{name}.csv"><button style="padding:4px 18px; border-radius:8px; background:#423fa1; color:#fff; border:0; margin-right:7px;">{description}</button></a>'
         st.markdown(href, unsafe_allow_html=True)
 
     export_csv_button(df_filt, "filtered_data_all", "Download All Filtered Customer Data (CSV)")
     export_csv_button(seg_tab, "segment_churn_loyalty", "Download Segment Churn & Loyalty Table (CSV)")
     export_csv_button(cluster_metrics, "cluster_metrics", "Download Cluster Summary Metrics (CSV)")
-
-    st.markdown("""
-                <br>
-                How Are Dynamic Insights Generated?
-                
-                Dynamic Insights are created using a set of smart rules written directly into the dashboard.  
-                These rules look at your filtered data and find the most important patterns and segments.
-                
-                Here’s what the engine looks for:
-                
-                - Churn rate by customer cluster; helps spot which groups are at risk
-                - Average loyalty scores; shows which clusters are the most or least loyal
-                - Top revenue drivers; highlights which groups spend the most
-                - Danger thresholds; such as high churn or low loyalty
-                - Growth or risk signals; for example, clusters with fast growth or high churn
-                
-                All of this is based on real numbers from the data you are currently viewing with your filters.  
-                The insights you see are clear, business-ready, and update instantly as you change your filters.
-                
-                No outside AI or cloud service is needed for these insights. They work every time, for any dataset.
-                
-                **Examples:**  
-                If cluster 1 has the highest churn, you’ll see  
-                > Clusters with highest churn: 1 (41 percent)
-                
-                If loyalty is low, you’ll get  
-                > Potential churn risk: Loyalty below 250. Proactive engagement recommended.
-                
-                If cluster 2 spends the most, you’ll see  
-                > Highest spend cluster: 2 (average spend $54)
-                
-                **Why is this approach reliable?**
-                
-                - Always on; no need for API keys or extra costs
-                - No outside connections; your data never leaves your dashboard, so it is private and safe
-                - Easy to update; you or anyone else can adjust the rules to fit your business logic or new types of data
-                
-                **About the "Connect LLM" Tab**  
-                If you ever want GPT-powered insights, just visit the Connect LLM tab.  
-                You can enter your own OpenAI API key and the dashboard will use the LLM to generate even more natural and detailed business insights.  
-                If you don’t enter a key, the regular local insights will continue working as always.
-                """, unsafe_allow_html=True)
-
 
 # ============ TAB 5: About ============
 with tabs[4]:
@@ -548,39 +477,13 @@ The dashboard is fully interactive, and powered by Streamlit.
 - Required fields: customer_id, subscription_type, cluster, churned, signup_date, monthly_spend, loyalty_points.
 - For best results, include country, tenure_months, and as many engagement/usage fields as possible.
 - The code and documentation are available here:  
-  [Customer 360 Analytics & Dynamic Insights Dashboard (GitHub)](https://github.com/aryankaushik89/aryankaushik89.github.io/tree/main/customer_analytics_ai)
+  [Customer 360 Analytics & AI Dashboard (GitHub)](https://github.com/aryankaushik89/aryankaushik89.github.io/tree/main/customer_analytics_ai)
 - To adapt, just update your data to match the expected field names and formats.
 
 **Project credit:**  
 Dashboard and data science automation by Aryan Kaushik.  
 Analysis and dashboard built for demo, portfolio, and educational use.
     """)
-
-# ============ TAB 6: Connect LLM (OPTIONAL) ============
-with tabs[5]:
-    st.markdown("<div class='big-heading'>Connect LLM (Optional: GPT Insights)</div>", unsafe_allow_html=True)
-    st.markdown("""
-By default, this dashboard uses **local, rule-based analytics** to generate "Dynamic Insights."  
-If you want advanced, GPT-powered, fully AI-generated insights, enter your OpenAI API key below (never stored).
-
-**How does this work?**
-- If a key is entered, insights on the Dynamic Insights tab will use GPT-3.5/4 to analyze your filtered data summary and generate text.
-- If no key is present, the dashboard defaults to always-on, robust, local analytics (never breaks, never costs you).
-
-**To use LLM-powered insights:**  
-- Paste your OpenAI API key (sk-...) in the box below and click "Save Key".  
-- Insights generation will switch to LLM as long as your session is active and your key has quota.
-
-*To go back to normal, just clear the key or reload the app.*
-
-""")
-    user_key = st.text_input("Enter your OpenAI API key here:", type="password")
-    if st.button("Save Key"):
-        st.session_state["user_openai_api_key"] = user_key
-        st.success("API key saved for your session!")
-    elif "user_openai_api_key" in st.session_state and not user_key:
-        st.session_state.pop("user_openai_api_key")
-        st.info("API key cleared for your session.")
 
 # --- FOOTER ---
 st.markdown("""

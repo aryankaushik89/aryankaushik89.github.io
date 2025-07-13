@@ -122,7 +122,7 @@ df_filt = filters.filter_df()
 
 # --- HEADER (NEW TITLE, ADJUSTED SPACING) ---
 st.markdown("<div class='main-header'>Customer Engagement & Churn Insights Dashboard</div>", unsafe_allow_html=True)
-st.markdown("<div class='sub-header'>Upload your customer data to analyze engagement, loyalty, churn, segments, and get instant dynamic business recommendations.<br>Or just explore with our rich demo dataset.</div>", unsafe_allow_html=True)
+st.markdown("<div class='sub-header'>Upload your customer data to analyze engagement, loyalty, churn, segments, and get instant dynamic business recommendations.<br>Or just explore with the preloaded synthetic dataset.</div>", unsafe_allow_html=True)
 st.markdown("&nbsp;", unsafe_allow_html=True)
 
 # --- TABS ---

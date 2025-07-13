@@ -4,6 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import base64
 from streamlit_dynamic_filters import DynamicFilters
+import os
 
 # --- PAGE SETUP ---
 st.set_page_config(
@@ -71,7 +72,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- LOAD DATA ---
-import os
 @st.cache_data
 def load_data():
     csv_path = os.path.join(os.path.dirname(__file__), "streamflow_customers.csv")
@@ -88,7 +88,8 @@ df['month_period'] = pd.to_datetime(df['signup_date'], errors='coerce').dt.to_pe
 
 # --- SIDEBAR: LOGO, FILTERS, FILE UPLOAD ---
 with st.sidebar:
-    st.image("streamflow_logo.png", width=330)
+    logo_path = os.path.join(os.path.dirname(__file__), "streamflow_logo.png")
+    st.image(logo_path, width=330)
     st.markdown("<h4 style='color:#f4f6fc; margin-bottom:1px;'>Customer 360 Analytics & AI</h4>", unsafe_allow_html=True)
     st.markdown("SaaS Customer Segmentation & Insights", unsafe_allow_html=True)
     st.divider()

@@ -76,7 +76,7 @@ import os
 def load_data():
     st.write("Current working directory:", os.getcwd())
     st.write("Files in current directory:", os.listdir("."))
-    return pd.read_csv("streamflow_customers.csv")
+    return pd.read_csv("customer_analytics_ai/streamflow_customers.csv")
 df = load_data()
 
 iso2_to_iso3 = {

@@ -636,8 +636,8 @@
         <section class="projects-section" id="projects">
             <div class="projects-title">Projects</div>
             <div class="projects-grid">
-                <!-- Real Project Card -->
-                <div class="project-card" onclick="window.open('fraud_detection/fraud_prediction_project.html', '_blank');">
+                <!-- Card 1: Fraud Detection  -->
+                <div class="project-card" onclick="window.open('fraud_detection/fraud_prediction_project_with_outputs.html', '_blank');">
                     <img src="project_banner.jpg" alt="Fraud Detection Project"/>
                     <div class="project-card-content">
                         <div class="project-card-title">Financial Transaction Fraud Detection</div>
@@ -654,39 +654,46 @@
                         </div>
                     </div>
                 </div>
-                <!-- Placeholder Project Card 1 -->
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80" alt="Project Placeholder"/>
+                <!-- Card 2: Customer Analytics & Churn  -->
+                <div class="project-card" onclick="window.open('customer_analytics_ai/customer_churn_project.html', '_blank');">
+                    <img src="https://nmgprod.s3.amazonaws.com/media/file/50/bf/cc2768e8a3985dcc876204fbb91d/cover_image__sZk3isjj__data_analytics.jpeg.960x540_q85_crop_upscale.jpg" alt="Customer Analytics Project"/>
+
                     <div class="project-card-content">
-                        <div class="project-card-title">Coming Soon</div>
-                        <div class="project-card-type">Data Science</div>
+                        <div class="project-card-title">Customer Analytics & Churn Prediction</div>
+                        <div class="project-card-type">Customer Analytics</div>
                         <div class="project-card-desc">
-                            Placeholder for next data science or analytics project. Details to follow!
+                            Advanced customer segmentation, churn prediction, and loyalty analytics for SaaS. Includes business-ready visuals, actionable insights, and a deep-dive notebook.
                         </div>
                         <div class="project-card-tags">
-                            <span class="project-card-tag">#data</span>
-                            <span class="project-card-tag green">#ml</span>
+                            <span class="project-card-tag">#python</span>
+                            <span class="project-card-tag green">#churn</span>
+                            <span class="project-card-tag">#eda</span>
+                            <span class="project-card-tag purple">#clustering</span>
+                            <span class="project-card-tag">#visualization</span>
                         </div>
                     </div>
                 </div>
-                <!-- Placeholder Project Card 2 -->
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Project Placeholder"/>
+                <!-- Card 3: Streamlit Dashboard -->
+                <div class="project-card" onclick="window.open('https://aryankaushik89appio-qw75l87bzfmpezoftf8zss.streamlit.app/', '_blank');">
+                    <img src="https://thumbs.dreamstime.com/z/kpi-analytics-dashboard-graphs-kpi-analytics-dashboard-graphs-screen-212689830.jpg?ct=jpeg" alt="Streamlit Dashboard"/>
                     <div class="project-card-content">
-                        <div class="project-card-title">Coming Soon</div>
-                        <div class="project-card-type">AI / Analytics</div>
+                        <div class="project-card-title">Customer Churn and Loyalty Dashboard</div>
+                        <div class="project-card-type">Interactive Analytics</div>
                         <div class="project-card-desc">
-                            Placeholder for another advanced analytics/AI project. Stay tuned!
+                            Explore interactive customer insights, segmentation, and AI powered recommendations in this live dashboard. Upload your own data or use the demo set.
                         </div>
                         <div class="project-card-tags">
-                            <span class="project-card-tag">#ai</span>
+                            <span class="project-card-tag">#streamlit</span>
+                            <span class="project-card-tag green">#dashboard</span>
+                            <span class="project-card-tag gold">#interactive</span>
+                            <span class="project-card-tag">#llm</span>
                             <span class="project-card-tag red">#python</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
+        
         <!-- Timeline/Experience Section -->
         <section class="timeline-section" id="work">
             <div class="timeline-title">Experience</div>
@@ -773,7 +780,7 @@
             </div>
         </section>
 
-        <!-- Education Section (Timeline Style) -->
+
         <section class="education-section" id="education">
             <div class="education-title">Education</div>
             <div class="education">
@@ -820,13 +827,13 @@
             </div>
         </section>
 
-        <!-- Footer -->
+
         <div class="footer" style="text-align:center;color:#aea77a;margin-top:60px;font-size:0.97em;padding-bottom:16px;">
             &copy; 2024 Aryan Kaushik &mdash; Portfolio.
             <span style="margin-left:22px; font-size:1em;"><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="color:var(--accent);text-decoration:none;">Back to Top</a></span>
         </div>
     </div>
-    <!-- JS: Nav highlight, timeline animation, email popup -->
+
     <script>
         const sections = ['overview','projects','work','education'];
         const navLinks = document.querySelectorAll('.nav-link');
@@ -840,7 +847,7 @@
                 }
             });
         });
-        // Timeline reveal
+
         function revealTimeline() {
             document.querySelectorAll('.timeline-event, .education-event').forEach((ev, idx) => {
                 const rect = ev.getBoundingClientRect();
@@ -856,7 +863,7 @@
             revealTimeline();
         });
 
-        // Email popup
+
         document.addEventListener('DOMContentLoaded', function() {
             var btn = document.getElementById('email-popup-btn');
             if (btn) {
@@ -869,3 +876,4 @@
     </script>
 </body>
 </html>
+
